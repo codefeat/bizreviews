@@ -27,6 +27,40 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 gem 'rails_12factor', group: :production
 gem 'pg', '~> 0.15', group: :production
+gem 'carrierwave'
+gem "fog"
+gem 'figaro'
+gem 'devise'
+gem 'activeadmin', github: 'activeadmin'
+gem 'cancan'
+gem 'draper'
+gem 'pundit'
+gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'simple_form'
+gem 'momentjs-rails'
+#gem 'stripe'
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+gem 'letter_opener', group: :development
+gem 'seed_dump'
+gem 'rake', '~> 11.3'
+gem 'metainspector'
+gem 'adminlte-rails'
+gem 'font-awesome-rails'
+gem 'less-rails-bootstrap'
+gem 'therubyracer'
+gem 'jquery-easing-rails'
+gem 'groupify'
+gem 'devise_invitable', '~> 1.7.0'
+#gem 'sucker_punch'
+#gem 'delayed_job_active_record'
+gem 'daemons'
+#gem 'maily_herald'
+gem 'bootstrap-will_paginate'
+gem 'bootstrap-popover-rails'
+gem 'best_in_place', '~> 3.0.1'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
