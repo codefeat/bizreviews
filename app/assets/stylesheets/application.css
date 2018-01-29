@@ -10,6 +10,295 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
+ *= require admin-lte
+ *= require twitter/bootstrap
+ *= require bootstrap/bootstrap-rails-tooltip
+ *= require bootstrap/bootstrap-rails-popover
  *= require_tree .
  *= require_self
+ *= require bootstrap-datepicker
+ *= require bootstrap-datetimepicker
  */
+
+ .form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+
+.bgimage {
+  width:100%;
+  height:500px;
+  background: url('https://images.unsplash.com/photo-1438109491414-7198515b166b?q=80&fm=jpg&s=cbdabf7a79c087a0b060670a6d79726c');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+.bgimage h5 {
+  color:white;
+  text-shadow:2px 2px #333;
+}
+
+/*Hero Unit 2*************************************/
+
+.hero-unit {
+    /*background-image:url('https://images.unsplash.com/photo-1438109491414-7198515b166b?q=80&fm=jpg&s=cbdabf7a79c087a0b060670a6d79726c');*/
+    background-size:cover;
+    background-color: #007bff;
+    height:300px;
+    margin-top: 90px;
+  
+  }
+.hero-unit h1 {
+    color: #FFFFFF;
+    font-size: 60px;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 0;
+}
+.hero-unit h2 {
+    font-size: 25px;
+    color: #FFFFFF;
+   
+}
+.fill{width:100%;height:350px;background-position:center;background-size:cover;
+}
+.inner-hero-unit {
+	width: 75%;
+	margin: auto;
+	padding-top: 40px;
+}
+
+.intro-section {
+  width:100%;
+  height:500px;
+  background: url('https://s3.amazonaws.com/reviewssos/workplace-1245776_1920.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+
+.skin-blue .logo {
+	background-color: #2388f9 !important;
+}
+
+.skin-blue .navbar {
+	background-color: grey !important;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+	background: #2388f9 !important;
+}
+
+.content-header {
+	background: whitesmoke !important;
+    margin-bottom: 10px !important;
+}
+
+.content-wrapper {
+	background: whitesmoke !important;
+    min-height: 267px;
+}
+
+.skin-blue .navbar .nav > li > a:hover, 
+.skin-blue .navbar .nav > li > a:active, 
+.skin-blue .navbar .nav > li > a:focus, 
+.skin-blue .navbar .nav .open > a, 
+.skin-blue .navbar .nav .open > a:hover, 
+.skin-blue .navbar .nav .open > a:focus {
+	background-color: #2388f9 !important;
+}
+
+.nav-tabs > li {
+	background: #e6e4e4;
+  /*background: #2388f9;*/
+
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+    border-top-color: #2388f9 !important;
+}
+
+.main-header {
+  background: #2388f9 !important;
+}
+
+.skin-blue .navbar {
+  background-color: whitesmoke !important;
+}
+
+.nav-pills {
+  background: #2388f9 !important;
+}
+
+.skin-blue.sidebar-mini.pace-done.pace-done {
+  padding-bottom: 0px !important;
+}
+
+.control-label.string.optional {
+  display: none !important;
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+  border-top-color: #2388f9 !important;
+}
+
+.content-wrapper {
+  border-top: 2px solid #2388f9 !important;
+  width: 100% !important;
+  margin-left: 0px !important;
+}
+
+#notice_wrapper {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.main-sidebar {
+  display: none !important;
+}
+
+.tab-content {
+  border: 0px !important;
+}
+
+.main-footer {
+  margin-left: 0px !important;
+  position:absolute !important;
+  bottom:0;
+  width:100% !important;
+  height:60px !important;   /* Height of the footer */
+}
+
+.bg-green, .callout.callout-success, .alert-success, .label-success, .modal-success .modal-body {
+  background-color: lightgreen!important;
+  border: 0px !important;
+}
+
+.pagination > .active > a, 
+.pagination > .active > span, 
+.pagination > .active > a:hover, 
+.pagination > .active > span:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span:focus {
+  color: white !important;
+}
+
+.pagination {
+  margin: 10px 0 !important;
+}
+
+.layout-top-nav .main-header .navbar {
+  background: transparent !important;
+}
+
+.content {
+  width: 100% !important;
+  background: transparent !important;
+  margin-bottom: 40px;
+}
+
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+   
+    background-color: #2388f9;
+    border-color: #2388f9;
+ 
+}
+
+.bg-blue {
+    background-color: #2388f9 !important;
+}
+
+body {
+   margin:0 !important;
+   padding:0 !important;
+   height:100% !important;
+}
+
+.skin-blue .navbar .nav a {
+  color: white !important;
+}
+
+.navbar-nav > li > .dropdown-menu {
+  background: #2388f9 !important;
+}
+
+.box {
+    
+    border-top: 3px solid #2388f9 !important;
+   
+}
