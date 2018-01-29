@@ -16,7 +16,6 @@
 //= require best_in_place.jquery-ui
 //= require moment
 //= require bootstrap-sprockets
-//= require pickers
 //= require turbolinks
 //= require bootstrap.min
 //= require adminlte
