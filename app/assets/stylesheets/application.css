@@ -18,7 +18,6 @@
  *= require bootstrap/bootstrap-rails-tooltip
  *= require bootstrap/bootstrap-rails-popover
  *= require bootstrap-datepicker
- *= require bootstrap-datetimepicker
  *= require_tree .
  *= require_self
  */
