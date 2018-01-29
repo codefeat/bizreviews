@@ -15,7 +15,6 @@
 //= require best_in_place
 //= require best_in_place.jquery-ui
 //= require moment
-//= require bootstrap-datepicker/core
 //= require bootstrap-sprockets
 //= require pickers
 //= require turbolinks

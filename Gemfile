@@ -36,7 +36,7 @@ gem 'cancan'
 gem 'draper'
 gem 'pundit'
 gem 'jquery-ui-rails', '~> 4.2.1'
-gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+#gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem 'simple_form'
 gem 'momentjs-rails'
 #gem 'stripe'
