@@ -17,6 +17,7 @@
 //= require moment
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
+//= require bootstrap-sprockets
 //= require pickers
 //= require turbolinks
 //= require bootstrap.min

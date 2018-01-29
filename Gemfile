@@ -61,6 +61,7 @@ gem 'daemons'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-popover-rails'
 gem 'best_in_place', '~> 3.0.1'
+gem 'bootstrap-sass'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
