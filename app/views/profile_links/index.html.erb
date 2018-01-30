@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Profile Links</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Profile review</th>
+      <th>Link</th>
+      <th>Link url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profile_links.each do |profile_link| %>
+      <tr>
+        <td><%= profile_link.user_id %></td>
+        <td><%= profile_link.profile_review_id %></td>
+        <td><%= profile_link.link_id %></td>
+        <td><%= profile_link.link_url %></td>
+        <td><%= link_to 'Show', profile_link %></td>
+        <td><%= link_to 'Edit', edit_profile_link_path(profile_link) %></td>
+        <td><%= link_to 'Destroy', profile_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Profile link', new_profile_link_path %>

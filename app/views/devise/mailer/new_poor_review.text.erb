@@ -1,0 +1,15 @@
+You’ve got a message! 
+
+<% @newPoorReview = PoorReview.last %>
+<% @bizName = User.find(@newPoorReview.user_id) %>
+<% @thisBizName = @bizName.business_name %>
+
+A new message was posted via the review funnel landing page for 
+<%= @thisBizName %>:
+
+
+Name: <%= @newPoorReview.first_name %> <%= @newPoorReview.last_name %>
+Action taken: Clicked Thumbs Down
+Phone: <%= @newPoorReview.phone %>
+Email: <%= @newPoorReview.email %>
+<%= @newPoorReview.message %>

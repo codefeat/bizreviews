@@ -1,0 +1,30 @@
+<div class="navbar-custom-menu" style="float: right; padding-right: 10px; padding-top: 2px; display: none;"><h1><b>Reviews</b>SOS</h1>
+</div>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+    <div class="col-md-9">
+      <ul class="nav nav-tabs" style="border-bottom: 0px !important;">
+           <li><%= link_to "DASHBOARD", root_path %></li>
+            <li style="background: #ffffff !important; display: none;">
+              <a  href="#">FUNNEL</a>
+            </li>
+            <li><%= link_to "WIDGETS", widgets_index_path %></li>
+            <li><%= link_to "INVITES", invites_path %></li>
+            <li><%= link_to "REVIEWS", businesses_review_path %></li>
+            <li>
+              <a href="#">REPORTING</a>
+            </li>
+          </ul>
+
+          <section class="content-header">
+            <h1>
+              <%= controller_name.upcase %>
+            </h1>
+            <ol class="breadcrumb" style="display: none;">
+              <li><a href="#"><i class="fa fa-dashboard"></i> ReviewsSOS</a></li>
+              <li class="active">Dashboard</li>
+            </ol>
+          </section>
+        </div>
+</div>

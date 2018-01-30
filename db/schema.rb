@@ -11,7 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129022558) do
+ActiveRecord::Schema.define(version: 20180130041846) do
+
+  create_table "invites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "recipient_id"
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "email"
+    t.string   "token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string   "link_cat"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "poor_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "invite_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.text     "message"
+    t.string   "ip_address"
+    t.string   "feedback_action"
+    t.integer  "status",          default: 0
+    t.text     "note"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "profile_links", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "profile_review_id"
+    t.integer  "link_id"
+    t.string   "link_url"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "profile_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "time_zone"
+    t.string   "lat"
+    t.string   "long"
+    t.string   "gplace_id"
+    t.string   "gcid"
+    t.string   "gfid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -26,6 +85,15 @@ ActiveRecord::Schema.define(version: 20180129022558) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "business_zipcode"
+    t.string   "business_name"
+    t.string   "business_phone"
+    t.string   "business_email"
+    t.string   "business_url"
+    t.string   "image"
+    t.integer  "role",                   default: 0
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

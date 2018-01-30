@@ -1,0 +1,15 @@
+<%= simple_form_for(@profile_link) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.text_field :link_url %>
+  </div>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <%= f.hidden_field :link_id, value: params[:lid] %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+New Review
+
+
+<% @newInvite = Invite.last %>
+<% @user = User.find(@newInvite.user_id) %>
+<% @salute = @user.business_name %>
+<% @bizLink = @user.business_name.parameterize('-') %>
+
+Hi <%= @newInvite.fname %>
+
+Thanks for choosing <%= @salute %>. I’d like to personally invite you to share your experience.
+
+Your feedback not only helps us, it helps other potential customers. It takes only a moment and would mean the world to us:
+
+<%= link_to "Review Un Now", "http://www.localhost:3000/companies/#{@bizLink}/review" %>
+
+Having trouble with the button? Click here instead.
+
+Thank you for your business and support!

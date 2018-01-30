@@ -1,0 +1,448 @@
+<% if user_signed_in? %>
+<%= render 'layouts/rs_header' %>
+<body class="hold-transition skin-blue layout-top-nav" style="padding-bottom: 100px;" onLoad="thisRate()">
+<div class="wrapper">
+  <header class="main-header">
+    <!-- Logo -->
+    <%= render 'layouts/rs_logo' %>
+    <!-- Header Navbar: style can be found in header.less -->
+ <%= render 'layouts/rs_navbar_statictop' %>
+
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+<%= render 'layouts/rs_aside_mainSideBar' %>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  <div class="row">
+     <div class="col-md-3">
+      <section class="content-header">
+      <h1>
+        REVIEWS
+      </h1>
+      <ol class="breadcrumb" style="display: none;">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+    </div>
+      <div class="col-md-9">
+        <%= render 'layouts/rs_topglobaltabs_2' %>
+      </div>
+      </div>
+    <section class="content" style="background: whitesmoke;">
+      <!-- Small boxes (Stat box) -->
+     <!-- Default box -->
+     <div class="row">
+      <!-- /.col -->
+        <div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active" style="display: none;"><a href="#google" data-toggle="tab"  onClick="thisRate()">Google</a></li>
+              <li class="active"><a href="#feedback" data-toggle="tab" onClick="thisRate()">Customer Feedback</a></li>
+              <li ><a href="#facebook" data-toggle="tab" onClick="thisRate()">facebook</a></li>
+              <li><a href="#yelp" data-toggle="tab" onClick="thisRate()">Yelp</a></li>
+              
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="google" style="display: none;">
+                   <div class="box" style="border-top: 0px !important;">
+                      <h3 style="text-align: center; padding-top: 20px; color: #666666!important;"><%= @user.business_name %> GOOGLE REVIEWS</h3>
+                        <div class="box-header with-border">
+
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                          </div>
+                        </div>
+                        <div class="box-body" style="text-align: center; margin: auto;">
+                          <%
+                          @placeName = @user.business_name
+                          @loc = "Crystal"
+
+                          #@place = @placeName.gsub!(' ', '').downcase
+
+                          #@yelper = @placeName.gsub!(/\ +/, '-')
+
+                            page = MetaInspector.new("https://www.google.com/search?source=hp&ei=PGpXWoSeEM3TjgT7kJQw&q=egg+house+cafe#lrd=0x52b336da935d8829:0x12a3dc587bbaca29,1,,,") 
+
+                            page.parsed
+
+                            doc = page.parsed
+                            #dates = []
+
+                            googleContents = doc.css(".r-iORQcIIeTV_g").map{ |div| div.child.text.strip}
+
+                            #grating = doc.css("div._4uyi").text 
+
+                            #gdates = doc.css("span.timestampContent")
+                            
+                            #newDate = doc.css('span.timestampContent').map{ |span| span.child.text.strip}
+
+                            #content = doc.css('div._5pbx.userContent._3576.p').map{ |div| div.child.text.strip}
+
+                            #revRating = doc.css('_51mq.img.sp_P4dHPMLAVud_2x.sx_ae93aa')
+
+                            #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+
+
+                          %>
+                                   <% @place %>
+                                   <p> <%= googleContents %> </p>
+                                    <table class="table table-striped">
+                                    <tr>
+                                    
+                                    <td>
+                                    <span class="info-box-number label bg-blue">
+                                    FB Rating
+                                    </span>
+                                    </td>
+                                    </tr>
+                                      <tr>
+                                        <th>Site</th>
+                                        <th>Date</th>
+                                        <th>Rating</th>
+                                        <th>Review</th>
+                                        <th colspan="3"></th>
+                                      </tr>
+                                      <% googleContents.each do |googleContent| 
+                                       
+
+                                        %>
+                                        <tr>
+                                          <td><span class="label bg-blue">Google</span></td>
+                                          <td><span class="label bg-blue"></span></td>
+                                          <td><span class="label bg-blue"></span></td>
+                                          <td><</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                        </tr>
+                                        <% end %>
+                                          </table>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                 
+
+                                </div>
+                                <!-- /.box-footer-->
+                              </div>
+
+              </div>
+              <!-- /.tab-pane -->
+              <div class="active tab-pane" id="feedback">
+                   <div class="box" style="border-top: 0px !important;">
+                   <%= @count %>
+                        <div class="box-body" style="text-align: center; margin: auto;">
+                                    <!-- /.col --> <%= will_paginate @feedbacks %>
+                                    <table class="table table-striped">
+                                      <tr>
+                                        <th>Date</th>
+                                        <th>Customer Details</th>
+                                        <th>Message</th>
+                                        <th>Status</th>
+                                        <th>Notes</th>
+
+                                      </tr>
+                                      <% @feedbacks.each do |feedback| 
+                                        %>
+                                        <% @fbid = feedback.id %>
+                                        <% @fstat = feedback.status %>
+
+                                        <tr>
+                                          <td style="width: 10%"><%= feedback.created_at %></td>
+                                          <td style="width: 18%">
+                                            <b>Name:</b> <%= feedback.first_name %> <%= feedback.last_name %><br />
+                                            <b>Action Taken:</b> Clicked Thumbs Down <br />
+                                            <b>Phone:</b> <%= feedback.phone %><br />
+                                            <b>Email:</b> <%= feedback.email %><br />
+                                          </td>
+                                          <td style="width: 35%;"><%= feedback.message %></td>
+                                            <td style="color: orange; font-weight: bold; width: 19%;">
+                                            <%= best_in_place feedback, :status, :type => :select, :collection => [ ["Attention", "Attention"], ["Responded", "Responded"], ["Resolved", "Resolved"] ] %>
+                                          </td>
+                                          <td><%= best_in_place feedback, :note, :as => :textarea, :place_holder => '<span style="color:#2388f9;font-weight:bold;">Click to add note!</span>' %></td>
+                                        </tr>
+                                        <% end %>
+                                          </table>
+                                          <%= will_paginate @feedbacks %>
+                                </div>
+
+
+
+
+
+
+                        
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                              
+                                </div>
+                                <!-- /.box-footer-->
+                              </div>
+
+              </div>
+              <!-- /.tab-pane -->
+              
+              <div class="tab-pane" id="facebook" >
+                <div class="box" style="border-top: 0px !important;">
+                <h3 style="text-align: center; padding-top: 20px; color: #666666!important;"><%= @user.business_name %> FACEBOOK REVIEWS</h3>
+                        <div class="box-header with-border">
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                          </div>
+                        </div>
+                        <div class="box-body" style="text-align: center; margin: auto;">
+                          <%
+                          @placeName = @user.business_name
+                          @loc = "Crystal"
+
+                          @place = @placeName.gsub!(' ', '').downcase
+
+                          @yelper = @placeName.gsub!(/\ +/, '-')
+
+                            page = MetaInspector.new("https://www.facebook.com/pg/#{@place}/reviews/") 
+
+                            page.parsed
+
+                            doc = page.parsed
+                            #dates = []
+
+                            userContents = doc.css("div._5pcr.userContentWrapper").map{ |div| div.child.text.strip}
+
+                            rating = doc.css("div._4uyi").text 
+
+                            dates = doc.css("span.timestampContent")
+                            
+                            newDate = doc.css('span.timestampContent').map{ |span| span.child.text.strip}
+
+                            content = doc.css('div._5pbx.userContent._3576.p').map{ |div| div.child.text.strip}
+
+                            revRating = doc.css('_51mq.img.sp_P4dHPMLAVud_2x.sx_ae93aa')
+
+                            #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+
+
+                          %>
+                                   <% @place %>
+                                   <p> <% userContents %> </p>
+                                    <table class="table table-striped">
+                                    <tr>
+                                    
+                                    <td>
+                                    <span class="info-box-number label bg-blue">
+                                    FB Rating
+                                    <%= rating %>
+                                    </span>
+                                    </td>
+                                    </tr>
+                                      <tr>
+                                        <th>Site</th>
+                                        <th>Date</th>
+                                        <th>Rating</th>
+                                        <th>Review</th>
+                                        <th colspan="3"></th>
+                                      </tr>
+                                      <% userContents.each do |userContent| 
+                                        date = userContent.match(/(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}+\s/)
+                                        revRate = userContent.match(/\d{1}+\s+\bstar\b/)  
+
+                                        %>
+                                        <tr>
+                                          <td><span class="label bg-blue">Facebook</span></td>
+                                          <td><span class="label bg-blue"><%= date %></span></td>
+                                          <td><span class="label bg-blue"><%= revRate %></span></td>
+                                          <td><%= userContent %></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                        </tr>
+                                        <% end %>
+                                          </table>
+                                </div>
+
+
+
+
+
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                 
+
+                                </div>
+                                <!-- /.box-footer-->
+                              </div>
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="yelp">
+                        <div class="box" style="border-top: 0px !important;">
+                                              <h3 style="text-align: center; padding-top: 20px; color: #666666!important;"><%= @user.business_name %> YELP REVIEWS</h3>
+
+                        <div class="box-header with-border">
+
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                          </div>
+                        </div>
+
+
+
+
+                        
+                        <div class="box-body" style="text-align: center; margin: auto;">
+                          <%
+                          @placeName = @user.business_name
+                          @city = "Crystal"
+
+                          @place = @placeName.gsub!(' ', '')
+
+                          @yelper = @placeName.gsub!(/\ +/, '-')
+
+                            page = MetaInspector.new("https://www.yelp.com/biz/egg-house-cafe-crystal") 
+
+                            page.parsed
+
+                            doc = page.parsed
+                            #dates = []
+
+                            userContents = doc.css("div.review-content")
+
+                            ratings = doc.css("div.rating-large")
+
+                            dates = doc.css("span.rating-qualifier").drop(1)
+                            
+                           
+
+                            #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+
+
+                          %>
+                                   <%= @place %>
+                                   <p> <% userContents %> </p>
+                                  
+                                    <table class="table table-striped" id="res">
+                                    <tr>
+                                      <td>
+                                      <span class="info-box-number label bg-red">
+                                      <span id="avgRating"></span>
+                                      </span>
+                                      </td>
+                                      </tr>
+                                    <tr>
+                                        <th>Site</th>
+                                        <th>Date</th>
+                                        <th>Rating</th>
+                                        <th>Review</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                      <% userContents.zip(dates.sort, ratings).each do |userContent, date, rating| 
+                                          userContent
+                                          date
+                                          r = rating['title'].split(" ")
+                                        %>
+                                        <% 
+                                          d = date.text
+                                        if d.include? '2017' %>
+                                        <tr>
+                                          <td><span class="label bg-red">Yelp</span></td>
+                                          <td><%= date.text %></td>
+                                          <td class="countable"><%= r[0] %></td>
+                                          <td><%= userContent.text %></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                        </tr>
+                                        <% end %>
+
+                                        <% end %>
+                                       
+                                          </table>
+                                </div>
+                                <span id="val"></span>
+                                <span id="rows"></span>
+                                <span id="avgRating"></span>
+
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                 
+
+
+                                </div>
+                                <!-- /.box-footer-->
+                              </div>
+               
+              </div>
+              <!-- /.tab-pane -->
+
+
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+    
+     
+      </div>
+      <!-- /.box -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render 'layouts/rs_footer' %>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- AdminLTE App -->
+
+  <script>
+           function thisRate() {
+            var rowCount = document.getElementById('res').rows.length;
+            var cls = document.getElementById("res").getElementsByTagName("td");
+        var sum = 0;
+        var avg = sum / rowCount;
+        for (var i = 0; i < cls.length; i++){
+            if(cls[i].className == "countable"){
+                sum += isNaN(cls[i].innerHTML) ? 0 : parseInt(cls[i].innerHTML);
+            }
+        }
+        document.getElementById('val').innerHTML = "Sum Value =" +sum
+        document.getElementById('rows', 'countable').innerHTML = "Rows =" + (rowCount - 2)
+        document.getElementById('avgRating').innerHTML = "Avg " + (sum / (rowCount - 2) ).toFixed(1)
+
+            }
+   </script>
+   <%= javascript_tag do %>
+      $(function () {
+        $('#example').popover({trigger: "hover"});
+
+        $(document).on('click.nav','.collapse.in',function(e) {
+    if( $(e.target).is('a') ) {
+        $(this).removeClass('in').addClass('collapse');
+    }
+});
+    });
+  <% end %>
+
+</body>
+</html>
+ <% else %>           
+    <%= render 'layouts/rs_home' %>       
+<% end %>
+            

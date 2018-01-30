@@ -1,0 +1,237 @@
+
+<% if user_signed_in? %>
+<%= render 'layouts/rs_header' %>
+<div class="wrapper">
+  <header class="main-header">
+    <!-- Logo -->
+    <%= render 'layouts/rs_logo' %>
+    <!-- Header Navbar: style can be found in header.less -->
+ <%= render 'layouts/rs_navbar_statictop' %>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+<%= render 'layouts/rs_aside_mainSideBar' %>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+   <div class="row">
+     <div class="col-md-3">
+      <section class="content-header">
+      <h1>
+        WIDGETS
+      </h1>
+      <ol class="breadcrumb" style="display: none;">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+    </div>
+      <div class="col-md-9">
+        <%= render 'layouts/rs_topglobaltabs_2' %>
+      </div>
+      </div>
+   
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
+
+        <h1>LOGOS FOR REVIEW SITES HERE</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalFormLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalFormLabel">Send A New Invite</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for Invite.new do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :fname %>
+            <%= f.input :lname %>
+            <%= f.input :email %>
+          </div>
+
+          <%= f.hidden_field :sender_id, value: current_user.id %>
+          <%= f.hidden_field :token, value: @form_auth_token %>
+
+          <div class="modal-footer">
+            <%= f.button :submit, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+
+      </div>
+      <div class="modal-footer" style="display: none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+    <div class="row">
+      <div class="box" style="border-top: 0px !important; background: transparent !important;">
+          <div class="box-body">
+              <div class="col-md-8">
+                        <div class="box" style="border-top: 0px !important; display: none;">
+                          <div class="box-header">
+                            <h3 class="box-title">Embed Code</h3><br />
+                               <div class="box-body">
+                                         <!-- textarea -->
+                                              <div class="form-group">
+                                                <textarea class="form-control" rows="5" placeholder="Enter ..." style="border-radius: 6px !important;">
+                                                  <div class="reviewmgr-embed" data-url="https://reviews.localbusinessally.com/spotberry/"></div><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.reviewmgr.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "reviewmgr-wjs");</script>
+                                                </textarea>
+                                              </div>
+                                      </div>
+                                      <!-- /.box-body -->
+                              </div>
+                                      <!-- /.box-body -->
+                                </div>
+
+                                <div class="box">
+                    <h3 style="text-align: center; padding-top: 20px; color: #666666!important;">Please take a moment to review your experience with us.</h3>
+                      <div class="box-header with-border">
+
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                  title="Collapse">
+                          <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        </div>
+                      </div>
+                      <div class="box-body" style="text-align: center; margin: auto;">
+                                    <% if current_user.image.present? %>
+                                          <%= image_tag current_user.image, class: "img-circle", style: "width: 304px;" %>
+                                        <% else %>
+                                          <%= image_tag "/assets/fallback/default.png", class: "img-circle", style: "width: 304px;" %>
+                                    <% end %>
+
+                                <div class="row" style="margin-bottom: 30px;">
+                                  <h2>
+                                    Your feedback not only helps us, it helps other potential customers.<br /> Would you recommend us to your friends and family?
+                                  </h2>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="padding-right: 6px;">
+                                      <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-up-green.png", style: "width: 200px; margin-top: 0px;" %></a>
+                                       </button>
+                                </div>
+                                <!-- ./col -->
+                                <div class="col-md-3" style="text-align: left;">
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalForm">
+                                      <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-down-red.png", style: "width: 200px; margin-top: 0px;" %></a>
+                                        </button>
+                                </div>
+                                <!-- ./col -->
+                                <div class="col-md-3"></div>
+
+                                </div>
+                      </div>
+                      <!-- /.box-body -->
+                           </div>
+                    <!-- /.box -->
+
+              </div>
+              <div class="col-md-4">
+                        <div class="box" style="padding: 10px !important">
+                          <span class="box-title" style="font-size: 18px;">Email Signature Snippets</span><br /><br />
+                          <span class="box-title" style="font-size: 12px;">Highlight the signature content and copy/paste into email.</span>
+
+                          <div class="box-header">
+                               <div class="box-body">
+                               <div>
+                               <h4>How did we do?</h4>
+                               <table border="0" cellpadding="0" cellspacing="0" style="width: 40px !important;">
+                               <tbody>
+                               <tr></tr>
+                                 <tr>
+                                   <td width="40"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-up-green.png",  style: "width: 30px; margin-top: 0px;" %></a>
+                                       </button></td>
+                                   
+                                   <td width="40"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalForm">
+                                      <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-down-red.png", style: "width: 30px; margin-top: 0px;" %></a>
+                                        </button></td>
+                                 </tr>
+                                 </tbody>
+                               </table>
+                               <a href="https://reviews.localbusinessally.com/spotberry/">Click here to rate Spotberry</a>
+                                  </div>
+                                      </div>
+                                      <!-- /.box-body -->
+                                      <div class="box-body">
+                                              <div>
+                                                 <h4>How did we do?</h4>
+                                                 <table border="0" cellpadding="0" cellspacing="0" style="width: 40px !important;">
+                                                 <tbody>
+                                                 <tr></tr>
+                                                   <tr>
+                                                   <td width="40"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-up-green.png", style: "width: 40px; margin-top: 0px;" %></a>
+                                                         </button></td>
+                                                     
+                                                     <td width="40"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalForm">
+                                                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-down-red.png", style: "width: 40px; margin-top: 0px;" %></a>
+                                                          </button>
+                                                      </td>
+                                                     </tr>
+                                                     </tbody>
+                                                   </table>
+                                                   <a href="https://reviews.localbusinessally.com/spotberry/" style="font-size: 12px; text-align: center;">Click here to rate Spotberry</a>
+                                                </div>
+                                      </div>
+                                      <!-- /.box-body -->
+                                      <div class="box-body">
+                                              <div style="text-align: center;">
+                                              <hr>
+                                             <h2>QRCode</h2>
+                                             <% @webUrl = @widgetUser.business_url %>
+                                              <%= image_tag "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=#{@webUrl}", class: "img-responsive", style: "text-align: center; margin: auto;" %>
+                                             
+                                             
+                                             <a href="https://reviews.localbusinessally.com/spotberry/" style="font-size: 12px;">Click here to rate Spotberry</a>
+                                                </div>
+                                      </div>
+                                      <!-- /.box-body -->
+                              </div>
+                                      <!-- /.box-body -->
+                        </div>
+
+              </div>
+              </div>
+</div>
+</div>
+</div>
+
+</div>
+  <!-- /.content-wrapper -->
+  <%= render 'layouts/rs_footer' %>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- AdminLTE App -->
+</body>
+</html>
+     
+<% end %>
+
