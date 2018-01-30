@@ -111,7 +111,6 @@
               <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
               <p class="text-muted">3909 Minnehaha Ave <br />
-                                    NextPakk #<%= @user.rsos_num %><br />
                                     Minneapolis, MN 55406</p>
               <hr>
 
@@ -345,11 +344,10 @@
               </div>
               <!-- /.tab-pane -->
 
-                  <br /><h3 style="display:none;">NextPakk Customer #<%= current_user.rsos_num %></h3>
  <div class="active tab-pane" id="settings">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form-horizontal", html: { method: :put, multipart: :true }) do |f| %>
   <%= devise_error_messages! %>
-<p><strong><h2>Change Profile Pic</h2></strong></p> 
+<p><strong><h2>Change Company Logo</h2></strong></p> 
 <div class="form-group">
     <%= f.label :image do %><br>
     <%= f.file_field :image, class: "form-control", style: "display:none;" %>

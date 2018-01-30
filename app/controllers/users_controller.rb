@@ -44,8 +44,8 @@ class UsersController < ApplicationController
   	@user = current_user
   	#@subscriptions = Subscription.all
   	#@subscription = current_user.subscriptions
-  	@plans = Plan.all
-    @promos = Promo.all
+  	#@plans = Plan.all
+    #@promos = Promo.all
     @pReviews = ProfileReview.all
     @pReview = ProfileReview.find_by_user_id(@user)
     
