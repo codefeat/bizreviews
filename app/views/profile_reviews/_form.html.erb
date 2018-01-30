@@ -1,0 +1,64 @@
+<%= simple_form_for(@profile_review) do |f| %>
+  <%= f.error_notification %>
+
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">Address1</label>
+        <div>
+    <%= f.input :address1, class: "form-control" %>
+      </div>
+  </div>
+
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">Address2</label>
+        <div>
+    <%= f.input :addresss2, class: "form-control"  %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">City</label>
+        <div>
+    <%= f.input :city, class: "form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">State</label>
+        <div>
+    <%= f.input :state, class: "form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">Latitude</label>
+        <div>
+    <%= f.input :lat, class: "form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">Longitude</label>
+        <div>
+    <%= f.input :long, class: "form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-4 control-label">Google Place Id</label>
+        <div>
+    <%= f.input :gplace_id, class: "form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-4 control-label">Google Company Id</label>
+        <div>
+    <%= f.input :gcid, class: "form-control" %>
+     </div>
+  </div>
+    <div class="form-group">
+      <label for="inputName" class="col-sm-2 control-label">Google FID</label>
+        <div>
+    <%= f.input :gfid, class: "form-control" %>
+   </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.button :submit, class: "btn btn-block btn-primary" %>
+  </div>
+<% end %>
+

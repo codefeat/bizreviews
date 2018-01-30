@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @profile_link.user_id %>
+</p>
+
+<p>
+  <strong>Profile review:</strong>
+  <%= @profile_link.profile_review_id %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @profile_link.link_id %>
+</p>
+
+<p>
+  <strong>Link url:</strong>
+  <%= @profile_link.link_url %>
+</p>
+
+<%= link_to 'Edit', edit_profile_link_path(@profile_link) %> |
+<%= link_to 'Back', profile_links_path %>

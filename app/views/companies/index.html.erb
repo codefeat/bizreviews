@@ -1,0 +1,168 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
+
+         <% @newLinks.each do |profile_link| %>
+                                          <button type="button" class="btn btn-default" style="width: 125px;">
+                                       <a href="<%= profile_link.link_url %>" style="cursor: pointer;"  ><%= image_tag "#{profile_link.link.image}", class: "img-responsive" %></a>
+                                        <% profile_link.id %>
+                                        </button>
+                                      <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalFormLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalFormLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+         
+                        <h2>We strive for 100% customer satisfaction. If we fell short, please tell us more so we can address your concerns.</h2>
+                      <form class="form-horizontal">
+                                <div class="form-group">
+                                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                                  <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                                  <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+
+                                  <div class="col-sm-10">
+                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                      <label>
+                                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                  </div>
+                                </div>
+                              </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <section class="content" style="background: whitesmoke;">
+      <!-- Small boxes (Stat box) -->
+     <!-- Default box -->
+      <div class="box" style="border-top: 0px !important;">
+      <h3 style="text-align: center; padding-top: 20px; color: #666666!important;">Please take a moment to review your experience with us.</h3>
+        <div class="box-header with-border">
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          </div>
+        </div>
+        <div class="box-body" style="text-align: center; margin: auto;">
+                      <% if current_user.image.present? %>
+                            <%= image_tag current_user.image, class: "img-circle", style: "width: 304px;" %>
+                          <% else %>
+                            <%= image_tag "/assets/fallback/default.png", class: "img-circle", style: "width: 250px;" %>
+                      <% end %>
+
+                  <div class="row" style="margin-bottom: 30px;">
+                    <h2>
+                      Your feedback not only helps us, it helps other potential customers.<br /> Would you recommend us to your friends and family?
+                    </h2>
+                  </div>
+                  <div class="row">
+                  <div class="col-md-6">
+                    <div class="box box-solid">
+                      <div class="box-body" style="float: right;">
+                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-up.jpg", class: "img-responsive", style: "width: 200px; margin-top: -20px;" %></a>
+                         </button>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+
+
+                  <div class="col-md-6" style="text-align: left;">
+                    <div class="box box-solid">
+                      <div class="box-body">
+                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalForm">
+                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-down.jpg", class: "img-responsive", style: "width: 200px; margin-top: -20px;" %></a>
+                          </button>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+
+                  </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+        copyright 2018 Powered by <b>reviews</b>SOS
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

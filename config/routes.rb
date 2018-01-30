@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :profile_reviews
+  resources :poor_reviews
+  resources :profile_links
+  resources :links
+  resources :invites
   #resources :review_statuses
-  #resources :poor_reviews
-  #resources :profile_links
-  #resources :links
-  #resources :profile_reviews
-  #resources :invites
   #resources :purchases, only: [:show]
 
 
@@ -49,11 +49,14 @@ Rails.application.routes.draw do
     #get '/schedules/:id/pay' => 'subscriptions#pay'
     #get 'subscriptions/:id/scheduled' => ''
 
+  #get 'users/signout' => 'devise/sessions#destroy'
+
   get 'subscriptions/pay' => 'subscriptions#pay'
 
     #match 'subscriptions/:id/pay' => 'subscriptions#pay', via: [:get, :post], :as => :subpay
   devise_scope :user do 
      match 'users/acct_setting' => 'registrations#acct_setting', :via => [:get], :as => 'acct_setting'
+     get  'users/signout' => 'devise/sessions#destroy'
   end 
 
   get 'widgets/index'

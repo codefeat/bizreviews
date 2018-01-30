@@ -1,17 +1,321 @@
-<h2>Sign up</h2>
+<%= render 'layouts/rs_header' %>
+<body class="hold-transition skin-blue sidebar-mini">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top" style="color: #2388f9 !important;"><strong>Reviews</strong>SOS</a>
+            </div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Services</a>
+                    </li>
+                          <li><%= link_to "Sign Up", new_user_registration_path, class: "page-scroll" %></li>
+                          <li><%= link_to "Sign In", new_user_session_path, class: "page-scroll" %></li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<div class="wrapper">
+  <header class="main-header">
+    <!-- Logo -->
+    <!-- Header Navbar: style can be found in header.less -->
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="margin-left: 0px !important; background: white !important;">
+    <!-- Content Header (Page header) -->
+    
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
+        <h1>LOGOS FOR REVIEW SITES HERE</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalFormLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalFormLabel">Send A New Invite</h4>
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer" style="display: none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content" style="width: 100% !important; background: white !important; margin-top: 100px;">
+<div class="row">
+  <div class="col-md-2">
+
+</div>
+ <div class="col-md-2">
+  <div class="box" style="border-top: 0px !important; box-shadow: none !important;">
+    <div class="box-header">
+     <p style="font-size: 40px"><b>$75</b>
+     <span style="font-size: 16px;">Per Month</span></p>
+    </div>
+    </div>
+  </div>
+ <div class="col-md-6">
+ <div class="box"  style="border-top: 0px !important; box-shadow: none !important;">
+    <div class="box-header">
+     <p style="font-size: 16px; float: left; padding-right: 10px;">
+Cancel Anytime<br />
+No Contracts<br />
+Free Setup <br />
+Free Customization<br />
+</p>
+
+<p style="font-size: 16px; float: left; padding-right: 10px;">
+Review Guarantee<br />
+Email Review Generation<br />
+Review Reminders<br />
+Bad Review Blocker<br />
+</p>
+<p style="font-size: 16px; float: left; padding-right: 10px;">
+Reputation Monitoring<br />
+Full Review Request Customization<br />
+Reputation Marketing<br />
+Social Distribution<br />
+</p>
+
+    </div>
+    </div>
+
+</div>
+ <div class="col-md-2">
+
+</div>
+
+
+
+</div>
+<div class="row">
+
+<div class="col-md-2">
+</div>
+<div class="col-md-4" style="display: none !important;"">
+
+<div class="box" style="text-align: center;" style="border-top: 0px !important;">
+<div class="box-header">
+ <p style="font-size: 30px"><b>$99</b><br />
+ <span style="font-size: 16px;">Per Month</span><hr></p>
+</div>
+<p style="font-size: 20px;">
+Cancel Anytime<br />
+No Contracts<br />
+Free Setup <br />
+Free Customization<br />
+Review Guarantee<br />
+Email Review Generation<br />
+Review Reminders<br />
+Bad Review Blocker<br />
+Reputation Monitoring<br />
+Full Review Request Customization<br />
+Reputation Marketing<br />
+Social Distribution<br />
+ Dashboard Analytics Access<br />
+ </p>
+</div>
+
+</div>
+<div class="col-md-8" style="margin-top: -50px;">
+          <div class="box" style="border-top: 0px !important;">
+            <div class="box-header">
+                <div class="register-box" style="background: transparent; !important;">
+  <div class="register-logo" style="margin-top: -40px; margin-bottom: -25px;">
+    <a href="../../index2.html"><b>Sign</b>Up</a>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+  <div class="register-box-body">
+    <% def generate_code(number)
+                      charset = Array('A'..'Z') + Array('2'..'9')
+                      Array.new(number) { charset.sample }.join
+                    end
 
-<%= render "users/shared/links" %>
+                    rviewsos = "rsos"
+
+                    custNum = rviewsos + generate_code(4)
+
+                    @thisSubs = Subscription.last
+
+                    @thisSubsId = @thisSubs.id
+                    %>
+
+                    <script language="javascript">
+                        Stripe.setPublishableKey("<%= ENV['STRIPE_TEST_PUBLISHABLE_KEY'] %>");
+                    </script>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {role: "form", class: 'cc_form'}) do |f| %>
+                      <%= devise_error_messages! %>
+
+     
+      <div class="form-group has-feedback">
+       <%= f.label :business_name %>
+                        <%= f.text_field :business_name, autofocus: true, class: "form-control" %>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+       <%= f.label :business_phone %>
+                        <%= f.text_field :business_phone, autofocus: true, class: "form-control" %>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.label :business_zipcode %>
+                        <%= f.text_field :business_zipcode, class: "form-control" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+       <%= f.label :first_name %>
+                        <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.label :last_name %>
+                        <%= f.text_field :last_name, class: "form-control" %>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.label :email %>
+                        <%= f.email_field :email, class: "form-control" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      
+      <div class="form-group has-feedback" style="display: none;">
+        <%= f.label :promo_code %>
+                        <%= f.text_field :promo_code, class: "form-control" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.label :password %>
+                        <% if @minimum_password_length %>
+                        <em>(<%= @minimum_password_length %> characters minimum)</em>
+                        <% end %>
+                        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.label :password_confirmation %>
+                        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> I agree to the <a href="#">terms</a>
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+           <%= f.hidden_field :rsos_num, :value => custNum %>
+           <%= f.hidden_field :sid, value:  @thisSubsId %>
+
+
+
+                        <%= f.submit "Sign up", class: "btn btn-info" %>
+                      </div>
+                    <% end %>
+                    <%= render "devise/shared/links" %>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+          </div>
+    <div class="social-auth-links text-center" style="display: none;">
+      <p>- OR -</p>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
+        Facebook</a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
+        Google+</a>
+    </div>
+
+    <a href="login.html" class="text-center" style="display: none;">I already have a membership</a>
+
+
+
+                </div>
+            </div>
+          </div>
+
+</div>
+</div>
+
+</div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer" style="margin-left: 0px;">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2017 <a href="https://spotberry.com">SpotBerry</a>.</strong> All rights
+    reserved.
+  </footer>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- AdminLTE App -->
+</body>
+</html>
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
