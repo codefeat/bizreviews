@@ -11,7 +11,7 @@
   <!-- Left side column. contains the logo and sidebar -->
 <%= render 'layouts/rs_aside_mainSideBar' %>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="min-height: 100% !important;">
     <div class="row">
      <div class="col-md-3">
       <section class="content-header">
@@ -105,7 +105,7 @@
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
-      <th>Sender</th>
+      <th style="display: none;">Sender</th>
       <th colspan="3"></th>
     </tr>
 
@@ -116,9 +116,9 @@
         <td><%= invite.fname %></td>
         <td><%= invite.lname %></td>
         <td><%= invite.email %></td>
-        <td><%= invite.user_id %></td>
-        <td><%= link_to 'Show', invite %></td>
-        <td><%= link_to 'Edit', edit_invite_path(invite) %></td>
+        <td style="display: none;"><%= invite.user_id %></td>
+        <td style="display: none;"><%= link_to 'Show', invite %></td>
+        <td style="display: none;"><%= link_to 'Edit', edit_invite_path(invite) %></td>
         <td><%= link_to invite, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" do %>
               <i class="fa fa-times-circle"></i></td>
           <% end %>
@@ -143,6 +143,7 @@
 
 </div>
   <!-- /.content-wrapper -->
+</div>
   <%= render 'layouts/rs_footer' %>
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->

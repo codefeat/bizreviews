@@ -1,0 +1,498 @@
+<% if user_signed_in? %>
+<%= render 'layouts/rs_header' %>
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <%= render 'layouts/rs_logo' %>
+    <!-- Header Navbar: style can be found in header.less -->
+ <%= render 'layouts/rs_navbar_statictop' %>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+<%= render 'layouts/rs_aside_mainSideBar' %>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="row">
+    <div class="col-md-3">
+      <section class="content-header">
+      <h1>
+        DASHBOARD
+      </h1>
+      <ol class="breadcrumb" style="display: none;">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+    </div>
+      <div class="col-md-9">
+        <%= render 'layouts/rs_topglobaltabs_2' %>
+      </div>
+    
+<!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="border-radius: 6px;">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                      </div>
+                      <div class="modal-body">
+                      <%
+                        @fbname = @bizprofile.fbBiz_name
+                        @yelpname = @bizprofile.yelpBiz_name
+                        @yelpcity = @user.city.parameterize('-')
+                        page = MetaInspector.new("https://www.yelp.com/biz/#{@yelpname}-#{@yelpcity}") 
+
+                        page.parsed
+
+                        doc = page.parsed
+
+                        revlink = doc.css("a.war-button/@href")
+
+                        @yelprev = revlink
+
+                        @pReview.gplace_id
+
+                        @googlepid = @pReview.gplace_id
+
+                      %>
+                      <% @yelpcity %>
+                        <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
+                                        <span style="display: none;">
+                                        <% @images = Dir.glob("app/assets/images/major/*.png") %>
+                                        <% @linkArrys = ["@fb", "@ggl", "@ylp"] %>
+                                          <% @images.zip(@linkArrys).each do |image, linkArry| %>
+                                           
+                                            <button type="button" class="btn btn-default" style="width: 125px;">
+                                            <a href="<%= linkArry %>"><%= image_tag "major/#{image.split('/').last}", class: "img-responsive" %></a>
+                                            </button>
+                                            
+                                          <% end %>
+</span>                         <% if @googlepid.blank? %>
+                                         <%= 'Pending ->' %>
+                                         <button type="button" class="btn btn-default disabled" data-dismiss="modal">
+                                          <a href="#" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-google.png", class: "img-responsive" %></a>
+                                         </button>
+                                         <% else %>
+                                         
+                                         <button type="button" class="btn btn-default">
+
+                                          <a href="http://search.google.com/local/writereview?placeid=<%= @pReview.gplace_id %>" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-google.png", class: "img-responsive" %></a>
+                                         </button>
+
+                                         <% end %>
+                                         <button type="button" class="btn btn-default">
+                                          <a href="https://www.yelp.com/<%= @yelprev %>" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-yelp.png", class: "img-responsive" %></a>
+                                         </button>
+                                         <button type="button" class="btn btn-default">
+                                          <a href="https://www.facebook.com/pg/<%= @fbname %>/reviews/" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-fb.png", class: "img-responsive"  %></a>
+                                         </button>
+                                         <hr>
+                                            
+
+                                          <% @newLinks.each do |profile_link| %>
+                                          <button type="button" class="btn btn-default" style="width: 125px;">
+                                       <a href="<%= profile_link.link_url %>" style="cursor: pointer;"  ><%= image_tag "#{profile_link.link.image}", class: "img-responsive" %></a>
+                                        <% profile_link.id %>
+                                        </button>
+                                      <% end %>
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="modal fade" id="myModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalFormLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content" style="border-radius: 6px;">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <hr>
+                      <h2 class="modal-title">We strive for 100% customer satisfaction. If we fell short, please tell us more so we can address your concerns.</h2>
+
+                    </div>
+                    <div class="modal-body">
+                        <%= simple_form_for(@poor_review) do |f| %>
+                            <% f.options[:html][:class] << 'form-horizontal' %>
+                                    <%= f.error_notification %>
+                                    <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "First Name", style: "border-radius: 6px !important;" %><br />
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <%= f.text_field :last_name, autofocus: true, class: "form-control", placeholder: "Last Name", style: "border-radius: 6px !important;" %><br />
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <%= f.text_field :email, autofocus: true, class: "form-control", placeholder: "Email", style: "border-radius: 6px !important;" %><br />
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <%= f.text_field :phone, autofocus: true, class: "form-control", placeholder: "Phone", style: "border-radius: 6px !important;" %><br />
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <%= f.text_area :message, autofocus: true, class: "form-control", placeholder: "Message", style: "border-radius: 6px !important;" %><br />
+                                      </div>
+                                    </div>
+                                    <%= @action = "Clicked Thumbs Down" %>
+                                    <%= request.remote_ip %>
+                                    <%= f.hidden_field :user_id, value: current_user.id %>
+                                    <% f.hidden_field :invite_id %>
+                                    <% f.hidden_field :ip_address, value: request.remote_ip %>
+                                    <% f.hidden_field :feedback_action, :value => @action %>
+
+                                  </div>
+                                   <div class="modal-footer">
+                                      <div class="form-group">
+                                  <div class="col-sm-offset-2 col-sm-10">
+                                  <%= f.button :submit, 'Send Message', class: "btn btn-primary btn-lg" %>
+                                  </div>
+                                </div>
+                                    </div>
+                                  <% end %>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="border-radius: 6px;">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel"></h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
+                                                    
+                                                    <% @images = Dir.glob("app/assets/images/major/*.png") %>
+                                                    <% @linkArrys = ["@fb", "@ggl", "@ylp"] %>
+                                                      <% @images.zip(@linkArrys).each do |image, linkArry| %>
+                                                       
+                                                        <button type="button" class="btn btn-default" style="width: 125px;">
+                                                        <a href="<%= linkArry %>"><%= image_tag "major/#{image.split('/').last}", class: "img-responsive" %></a>
+                                                        </button>
+                                                        
+                                                      <% end %>
+
+                                                     
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-labelledby="linkModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="border-radius: 6px;">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="linkModalLabel"></h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
+                                                    <span style="display: none;">
+                                                    <% @images = Dir.glob("app/assets/images/major/*.png") %>
+                                                    <% @linkArrys = ["@fb", "@ggl", "@ylp"] %>
+                                                      <% @images.zip(@linkArrys).each do |image, linkArry| %>
+                                                       
+                                                        <button type="button" class="btn btn-default" style="width: 125px;">
+                                                        <a href="<%= linkArry %>"><%= image_tag "major/#{image.split('/').last}", class: "img-responsive" %></a>
+                                                        </button>
+                                                        
+                                                      <% end %>
+                                                     </span>
+
+                                                    <h3>Major</h3>
+                                                        <% @majorlinks.each do |link| %>
+                                                              <% lid = link.id %>
+                                                            <button type="button" class="btn btn-default" style="width: 125px;">
+                                                                <a href="profile_links/<%= lid %>/create"><%= image_tag "#{link.image}", class: "img-responsive" %></a>
+                                                            </button>
+                                                        <% end %>
+                                                        <hr>
+                                                    <h3>Social Media</h3>
+                                                        <% @somelinks.each do |link| %>
+                                                        <% lid = link.id %>
+                                                            <button type="button" class="btn btn-default" style="width: 125px;">
+                                                                <a href="profile_links/<%= lid %>/create"><%= image_tag "#{link.image}", class: "img-responsive" %></a>
+                                                            </button>
+                                                        <% end %>
+                                                          <hr>
+                                                    <h3>Local</h3>
+                                                        <% @loclinks.each do |link| %>
+                                                        <% lid = link.id %>
+                                                            <button type="button" class="btn btn-default" style="width: 125px;">
+                                                                <a href="profile_links/<%= lid %>/create"><%= image_tag "#{link.image}", class: "img-responsive" %></a>
+                                                            </button>
+                                                        <% end %>
+                                                          <hr>
+                                                    <h3>Directory</h3>
+                                                        <% @dirlinks.each do |link| %>
+                                                        <% lid = link.id %>
+                                                            <button type="button" class="btn btn-default" style="width: 125px;">
+                                                                <a href="profile_links/<%= lid %>/create"><%= image_tag "#{link.image}", class: "img-responsive" %></a>
+                                                            </button>
+                                                        <% end %>        
+                                                            
+                                                    <span style="display: none;">
+                                                     <button type="button" class="btn btn-default">
+                                                      <a href="http://search.google.com/local/writereview?placeid=<%= @pReview.gplace_id %>" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-google.png", class: "img-responsive" %></a>
+                                                     </button>
+                                                     <button type="button" class="btn btn-default">
+                                                      <a href="https://www.yelp.com/writeareview/biz/DBD5ztKCCTPFfA2rfZHs_Q" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-yelp.png", class: "img-responsive" %></a>
+                                                     </button>
+                                                     <button type="button" class="btn btn-default">
+                                                      <a href="https://www.facebook.com/pg/EggHouseCafe/reviews/" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-fb.png", class: "img-responsive"  %></a>
+                                                     </button>
+                                                     </span>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+    <section class="content" style="background: whitesmoke;">
+      <!-- Small boxes (Stat box) -->
+     <!-- Default box -->
+     <div class="row">
+
+            <div class="col-md-3">
+
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#links" data-toggle="tab">Links</a></li>
+              <li><a href="#google" data-toggle="tab">Google</a></li>
+              <li style="display: none;"><a href="#yelp" data-toggle="tab">Yelp</a></li>
+            </ul>
+            <div class="tab-content">
+
+               <!-- /.tab-pane -->
+                    <div class="active tab-pane" id="links">
+                                <h3 style="text-align: center; padding-top: 20px; color: #666666!important;">Your Review Site Links</h3>
+                                    <div style="display: none;">
+                                          <% @images = Dir.glob("app/assets/images/major/*.png") %>
+                                              <% @linkArrys = ["fb", "gogl", "ylp"] %>
+                                          <% @images.zip(@linkArrys).each do |image, linkArry| %>
+                                            <button type="button" class="btn btn-primary btn-sm" style="width: 105px;">
+                                            <a href="<%= linkArry %>"><%= image_tag "major/#{image.split('/').last}", class: "img-responsive" %></a>
+                                            </button>
+                                          <% end %>
+                                    </div>
+                                    <button type="button" class="btn btn-box-tool btn-xs pull-right" data-toggle="modal" data-target="#linkModal" style="background: transparent !important;">
+                                        <a href="#" style="color: #2388f9 !important;">+ Add Link</a>
+                                    </button><br /><br />
+                                     <% @newLinks.each do |profile_link| %>
+                                       <a href="#" class="btn btn-block btn-default btn-xs" ><%= image_tag "#{profile_link.link.image}" %></a>
+                                        <% profile_link.id %>
+                                        <%= link_to 'X', profile_link, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-box-tool", style: "background: red; padding: 3px !important; margin-top: -41px !important; float: right; font-weight: bold !important; color: white !important; opacity: 0.25;" %><br />
+                                      <% end %>
+                                <!-- /.box-body -->
+                               
+                                <!-- /.box-footer-->
+               
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="google">
+                   
+                                        <h3 style="text-align: center; color: #2388f9 !important; border: 1px lightgrey solid; border-radius: 6px;padding: 4px;">Google Settings</h3>
+                                     
+                                      <% @cname = @user.business_name.gsub!(/\ +/, '-') 
+
+
+                                      %>
+                                      <span style="font-weight: bold; font-size: 13px;"><%= @user.business_name %></span><br />
+                                      <span><%= @pReview.address1 %></span><br />
+                                      <span><%= @pReview.city %> <%= @pReview.state %>, <%= @user.business_zipcode %> </span><br /><br />
+                                      <span style="font-weight: bold; font-size: 13px;">Latitude/Longitude</span><br />
+                                      <span><%= @pReview.lat %>/<%= @pReview.long %></span><br /><br />
+                                      <span><b style="font-size: 13px;">Google Place ID:</b> <br /><%= @pReview.gplace_id %></span><br />
+                                      <span><b style="font-size: 13px;">Google CID:</b> <br /><%= @pReview.gcid %></span><br />
+                                      <span><b style="font-size: 13px;">Google FID:</b> <br /><%= @pReview.gfid %></span><br /><br />
+
+                                      <%= link_to "Edit", edit_profile_review_path(@pReview.id), class: "btn btn-primary btn-block" %>
+                                      
+                                      <a href="/companies/<%= @cname %>/review">Biz Link</a>
+          <!-- /.box -->
+                    </div>
+                    <!-- /.tab-pane -->
+                    
+
+              <div class="tab-pane" id="yelp">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
+
+
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+
+     <div class="col-md-9">
+
+      <div class="box">
+      <h3 style="text-align: center; padding-top: 20px; color: #666666!important;">Please take a moment to review your experience with us.</h3>
+        <div class="box-header with-border">
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          </div>
+        </div>
+        <div class="box-body" style="text-align: center; margin: auto;">
+                      <% if current_user.image.present? %>
+                            <%= image_tag current_user.image, class: "img-circle", style: "width: 304px;" %>
+                          <% else %>
+                            <%= image_tag "/assets/fallback/default.png", class: "img-circle", style: "width: 304px;" %>
+                      <% end %>
+
+                  <div class="row" style="margin-bottom: 30px;">
+                    <h2>
+                      Your feedback not only helps us, it helps other potential customers.<br /> Would you recommend us to your friends and family?
+                    </h2>
+                  </div>
+                  <div class="row">
+                  <div class="col-md-3">
+                    <!-- /.box -->
+                  </div>
+                  <div class="col-md-3">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-up-green.png", class: "img-responsive", style: "width: 200px; margin-top: 0px;" %></a>
+                         </button>
+                  </div>
+                  <div class="col-md-3">
+                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalForm">
+                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-down-red.png", class: "img-responsive", style: "width: 200px; margin-top: 0px;" %></a>
+                          </button>
+                      
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-md-3">
+                    
+                     
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+
+                  </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+
+                  
+                     <%
+                      
+
+                        page = MetaInspector.new('https://www.yelp.com/biz/karta-thai-columbia-heights') 
+
+                        page.parsed
+
+                        doc = page.parsed
+
+                        revlink = doc.css("a.war-button/@href")
+
+                        #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+                      %>
+                      <%  
+                          str = "Spotberry Online Solutions"
+                          str.parameterize('-')
+
+                      %><br />
+                      <% revlink %> 
+                    </div>
+                    <!-- /.box-footer-->
+                  </div>
+      </div>
+      </div>
+      </div>
+      <!-- /.box -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render 'layouts/rs_footer' %>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- AdminLTE App -->
+</body>
+</html>
+ <% else %>           
+    <%= render 'layouts/rs_home' %>       
+<% end %>

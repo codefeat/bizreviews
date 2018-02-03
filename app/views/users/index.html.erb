@@ -38,6 +38,26 @@
                         <h4 class="modal-title" id="myModalLabel"></h4>
                       </div>
                       <div class="modal-body">
+                      <%
+                        @fbname = @bizprofile.fbBiz_name
+                        @yelpname = @bizprofile.yelpBiz_name
+                        @yelpcity = @user.city.parameterize('-')
+                        page = MetaInspector.new("https://www.yelp.com/biz/#{@yelpname}-#{@yelpcity}") 
+
+                        page.parsed
+
+                        doc = page.parsed
+
+                        revlink = doc.css("a.war-button/@href")
+
+                        @yelprev = revlink
+
+                        @pReview.gplace_id
+
+                        @googlepid = @pReview.gplace_id
+
+                      %>
+                      <% @yelpcity %>
                         <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
                                         <span style="display: none;">
                                         <% @images = Dir.glob("app/assets/images/major/*.png") %>
@@ -49,16 +69,27 @@
                                             </button>
                                             
                                           <% end %>
-
-                        				         
+</span>                         <% if @googlepid.blank? %>
+                                         <%= 'Pending ->' %>
+                                         <button type="button" class="btn btn-default disabled" data-dismiss="modal">
+                                          <a href="#" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-google.png", class: "img-responsive" %></a>
+                                         </button>
+                                         <% else %>
+                                         
                                          <button type="button" class="btn btn-default">
-                                        	<a href="https://www.yelp.com/writeareview/biz/DBD5ztKCCTPFfA2rfZHs_Q" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-yelp.png", class: "img-responsive" %></a>
+
+                                          <a href="http://search.google.com/local/writereview?placeid=<%= @pReview.gplace_id %>" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-google.png", class: "img-responsive" %></a>
+                                         </button>
+
+                                         <% end %>
+                                         <button type="button" class="btn btn-default">
+                                          <a href="https://www.yelp.com/<%= @yelprev %>" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-yelp.png", class: "img-responsive" %></a>
                                          </button>
                                          <button type="button" class="btn btn-default">
-                                        	<a href="https://www.facebook.com/pg/EggHouseCafe/reviews/" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-fb.png", class: "img-responsive"  %></a>
+                                          <a href="https://www.facebook.com/pg/<%= @fbname %>/reviews/" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-fb.png", class: "img-responsive"  %></a>
                                          </button>
                                          <hr>
-                                            </span>
+                                            
 
                                           <% @newLinks.each do |profile_link| %>
                                           <button type="button" class="btn btn-default" style="width: 125px;">
@@ -213,7 +244,17 @@
                                                             </button>
                                                         <% end %>        
                                                             
-                                                    
+                                                    <span style="display: none;">
+                                                     <button type="button" class="btn btn-default">
+                                                      <a href="http://search.google.com/local/writereview?placeid=<%= @pReview.gplace_id %>" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-google.png", class: "img-responsive" %></a>
+                                                     </button>
+                                                     <button type="button" class="btn btn-default">
+                                                      <a href="https://www.yelp.com/writeareview/biz/DBD5ztKCCTPFfA2rfZHs_Q" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-yelp.png", class: "img-responsive" %></a>
+                                                     </button>
+                                                     <button type="button" class="btn btn-default">
+                                                      <a href="https://www.facebook.com/pg/EggHouseCafe/reviews/" style="cursor: pointer;" target="blank"><%= image_tag "/assets/major/sm-fb.png", class: "img-responsive"  %></a>
+                                                     </button>
+                                                     </span>
                                                   </div>
                                                   <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -267,13 +308,32 @@
                    
                                         <h3 style="text-align: center; color: #2388f9 !important; border: 1px lightgrey solid; border-radius: 6px;padding: 4px;">Google Settings</h3>
                                      
-                                      <% @cname = @user.business_name
+                                      <% @cname = @user.business_name.gsub!(/\ +/, '-') 
 
 
                                       %>
-                                    
+                                      <span>Business Name: <b><%= best_in_place @user, :business_name, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Business Name</span>' %></b></span><br />
+                                      <span><b style="font-size: 11px;"><%= best_in_place @pReview, :address1, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Address1</span>' %><br /> <b style="font-size: 11px;"><%= best_in_place @user, :city, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add City</span>' %>  <b style="font-size: 11px;">, <%= best_in_place @pReview, :state, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add State</span>' %></b></span><br />
 
-                                      <%= link_to "Edit", edit_profile_review_path(@pReview.id), class: "btn btn-primary btn-block" %>
+                                      <span><b style="font-size: 11px;"><%= best_in_place @user, :business_zipcode, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Update Zip Code</span>' %></span>
+                                      <hr>
+                                      <span><b style="font-size: 13px;">Latitude/Longitude</b></span><br />
+                                      <span>Latitude: <%= best_in_place @pReview, :lat, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Latitude</span>' %></span><span><b style="font-size: 13px;"></b></span><br />
+                                      <span>Longitude: <%= best_in_place @pReview, :long, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Longitude</span>' %></span>
+                                      <hr>
+
+                                      <span><b style="font-size: 13px;">Google Place ID:</b></span><br />
+                                      <span><%= best_in_place @pReview, :gplace_id, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Google Place Id!</span>' %></span>
+                                      <br />
+
+                                      <span><b style="font-size: 13px;">Google CID:</b></span><br />
+                                      <span><%= best_in_place @pReview, :gcid, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Google CID</span>' %></span>
+                                      <br />
+
+                                      <span><b style="font-size: 13px;">Google FID:</b></span><br />
+                                      <span><%= best_in_place @pReview, :gfid, :as => :input, :place_holder=> '<span style="color:#d4d7da;font-weight:bold;">Add Google FID</span>' %></span>
+                                      <br />
+
                                       
                                       <a href="/companies/<%= @cname %>/review">Biz Link</a>
           <!-- /.box -->
@@ -281,60 +341,7 @@
                     <!-- /.tab-pane -->
                     
 
-              <div class="tab-pane" id="yelp">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
+              
 
 
 
@@ -347,15 +354,72 @@
         <!-- /.col -->
 
      <div class="col-md-9">
+     
+            <!-- Info boxes -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-print"></i></span>
 
+            <div class="info-box-content">
+              <span class="info-box-text">FEEDBACK</span>
+              <span class="info-box-number"><%= @count %></small></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-envelope-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">INVITES</span>
+              <span class="info-box-number"><%= @incount %></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12" style="display: none;">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-yelp"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">YELP</span>
+              <span class="info-box-number">4.2 stars</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12" style="display: none;">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua" style="background: #2388f9 !important"><i class="fa fa-facebook"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">FACEBOOK</span>
+              <span class="info-box-number">4.5 stars</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
       <div class="box">
       <h3 style="text-align: center; padding-top: 20px; color: #666666!important;">Please take a moment to review your experience with us.</h3>
         <div class="box-header with-border">
 
           <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          
           </div>
         </div>
         <div class="box-body" style="text-align: center; margin: auto;">
@@ -400,18 +464,15 @@
 
                   
                      <%
-                     	@placeName = "Egg House Cafe"
-                     	@loc = "Crystal"
+                      
 
-                     	@yelper = @placeName.gsub!(/\ +/, '-')
-
-                        page = MetaInspector.new('https://www.facebook.com/pg/egghousecafe/reviews/') 
+                        page = MetaInspector.new('https://www.yelp.com/biz/karta-thai-columbia-heights') 
 
                         page.parsed
 
                         doc = page.parsed
 
-                        rating = doc.css("div._4uyi").text
+                        revlink = doc.css("a.war-button/@href")
 
                         #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
                       %>
@@ -420,6 +481,7 @@
                           str.parameterize('-')
 
                       %><br />
+                      <% revlink %> 
                     </div>
                     <!-- /.box-footer-->
                   </div>
@@ -450,4 +512,3 @@
  <% else %>           
     <%= render 'layouts/rs_home' %>       
 <% end %>
-            

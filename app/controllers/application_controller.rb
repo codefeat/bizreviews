@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:business_url])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:city])
     devise_parameter_sanitizer.permit(:account_update, keys: [:business_name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:business_phone])
     devise_parameter_sanitizer.permit(:account_update, keys: [:business_zipcode])
@@ -36,7 +37,11 @@ class ApplicationController < ActionController::Base
   end
 
   def create_profile_review
-      ProfileReview.create(:user_id => current_user.id)
+  		@lastUser = User.last
+  		@thisBiz = @lastUser.business_name
+  		@revBiz	= @thisBiz.parameterize('-').downcase
+  		@fbBiz = @thisBiz.gsub(' ', '').downcase
+      ProfileReview.create(:user_id => current_user.id, :googleBiz_name => @revBiz, :fbBiz_name => @fbBiz, :yelpBiz_name => @revBiz)
   end
 
   def after_update_path

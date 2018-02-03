@@ -1,8 +1,23 @@
-<p>Hello <%= @resource.email %>!</p>
 
-<p>Someone has requested a link to change your password. You can do this through the link below.</p>
+<h1>New Review </h1>
 
-<p><%= link_to 'Change my password', edit_password_url(@resource, reset_password_token: @token) %></p>
+<blockquote>
+<% @newInvite = Invite.last %>
+<% @user = User.find(@newInvite.user_id) %>
+<% @salute = @user.business_name %>
+<% @bizLink = @user.business_name.parameterize('-') %>
 
-<p>If you didn't request this, please ignore this email.</p>
-<p>Your password won't change until you access the link above and create a new one.</p>
+<h2>Hi <%= @newInvite.fname %></h2>
+
+
+
+Thanks for choosing <%= @salute %>. I’d like to personally invite you to share your experience.<br /><br />
+
+Your feedback not only helps us, it helps other potential customers.<br /> It takes only a moment and would mean the world to us:<br />
+
+<h4><%= link_to "Review Us Now", "http://www.localhost:3000/companies/#{@bizLink}/review" %></h4>
+
+Having trouble with the button? Click here instead.<br /><br />
+
+Thank you for your business and support!
+</blockquote>
