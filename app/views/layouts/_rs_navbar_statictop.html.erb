@@ -37,7 +37,7 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown messages-menu">
+            <li class="dropdown messages-menu" style="display: none;">
               <!-- Menu toggle button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-envelope-o"></i>
@@ -75,18 +75,18 @@
             <!-- Notifications Menu -->
             <li class="dropdown notifications-menu">
               <!-- Menu toggle button -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
+              <a href="businesses/review" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-thumbs-down"></i>
                 <span class="label label-warning"><%= @count %></span>
               </a>
               <ul class="dropdown-menu">
-                <li class="header">You have 10 notifications</li>
+                <li class="header">You have <%= @count %> notifications</li>
                 <li>
                   <!-- Inner Menu: contains the notifications -->
                   <ul class="menu">
                     <li><!-- start notification -->
                       <a href="#">
-                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                        <i class="fa fa-users text-aqua"></i> You have a total of <%= @count %> unresolved feedback %>
                       </a>
                     </li>
                     <!-- end notification -->
@@ -96,7 +96,7 @@
               </ul>
             </li>
             <!-- Tasks Menu -->
-            <li class="dropdown tasks-menu">
+            <li class="dropdown tasks-menu" style="display: none;">
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-flag-o"></i>

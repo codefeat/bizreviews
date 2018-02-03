@@ -47,7 +47,7 @@ def show
 
   def after_sign_up_path_for(resource)
     #'/an/example/path' # Or :prefix_to_your_route
-     create_profile_review
+     #create_profile_review
     if create_profile_review
     	#redirect_to url_for(:controller => 'subscriptions', :id => params[:sid], :action => 'pay' )
       #redirect_to url_for(:controller => 'subscriptions', :sid => params[:sid], :action => 'pay'), notice: 'delivery was successfully created.' 

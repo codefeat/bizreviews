@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 <%= render 'layouts/rs_header' %>
-<body class="hold-transition skin-blue layout-top-nav" style="padding-bottom: 100px;" onLoad="thisRate()">
+<body class="hold-transition skin-blue layout-top-nav" style="padding-bottom: 100px;" >
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
@@ -39,8 +39,8 @@
             <ul class="nav nav-tabs">
               <li class="active" style="display: none;"><a href="#google" data-toggle="tab"  onClick="thisRate()">Google</a></li>
               <li class="active"><a href="#feedback" data-toggle="tab" onClick="thisRate()">Customer Feedback</a></li>
-              <li ><a href="#facebook" data-toggle="tab" onClick="thisRate()">facebook</a></li>
-              <li><a href="#yelp" data-toggle="tab" onClick="thisRate()">Yelp</a></li>
+              <li ><a href="#yelp" data-toggle="tab" onClick="thisRate()">Yelp</a></li>
+              <li><a href="#facebook" data-toggle="tab" onClick="thisRate1()">facebook</a></li>
               
             </ul>
             <div class="tab-content">
@@ -133,10 +133,10 @@
               <!-- /.tab-pane -->
               <div class="active tab-pane" id="feedback">
                    <div class="box" style="border-top: 0px !important;">
-                   <%= @count %>
+                   <% @count %> 
                         <div class="box-body" style="text-align: center; margin: auto;">
                                     <!-- /.col --> <%= will_paginate @feedbacks %>
-                                    <table class="table table-striped">
+                                    <table class="table table-striped" style="text-align: left;">
                                       <tr>
                                         <th>Date</th>
                                         <th>Customer Details</th>
@@ -160,7 +160,7 @@
                                           </td>
                                           <td style="width: 35%;"><%= feedback.message %></td>
                                             <td style="color: orange; font-weight: bold; width: 19%;">
-                                            <%= best_in_place feedback, :status, :type => :select, :collection => [ ["Attention", "Attention"], ["Responded", "Responded"], ["Resolved", "Resolved"] ] %>
+                                            <%= best_in_place feedback, :status, :type => :select, :collection => [ ["attention", "attention"], ["responded", "responded"], ["resolved", "resolved"] ] %>
                                           </td>
                                           <td><%= best_in_place feedback, :note, :as => :textarea, :place_holder => '<span style="color:#2388f9;font-weight:bold;">Click to add note!</span>' %></td>
                                         </tr>
@@ -184,103 +184,9 @@
 
               </div>
               <!-- /.tab-pane -->
-              
-              <div class="tab-pane" id="facebook" >
-                <div class="box" style="border-top: 0px !important;">
-                <h3 style="text-align: center; padding-top: 20px; color: #666666!important;"><%= @user.business_name %> FACEBOOK REVIEWS</h3>
-                        <div class="box-header with-border">
-                          <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                    title="Collapse">
-                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                          </div>
-                        </div>
-                        <div class="box-body" style="text-align: center; margin: auto;">
-                          <%
-                          @placeName = @user.business_name
-                          @loc = "Crystal"
-
-                          @place = @placeName.gsub!(' ', '').downcase
-
-                          @yelper = @placeName.gsub!(/\ +/, '-')
-
-                            page = MetaInspector.new("https://www.facebook.com/pg/#{@place}/reviews/") 
-
-                            page.parsed
-
-                            doc = page.parsed
-                            #dates = []
-
-                            userContents = doc.css("div._5pcr.userContentWrapper").map{ |div| div.child.text.strip}
-
-                            rating = doc.css("div._4uyi").text 
-
-                            dates = doc.css("span.timestampContent")
-                            
-                            newDate = doc.css('span.timestampContent').map{ |span| span.child.text.strip}
-
-                            content = doc.css('div._5pbx.userContent._3576.p').map{ |div| div.child.text.strip}
-
-                            revRating = doc.css('_51mq.img.sp_P4dHPMLAVud_2x.sx_ae93aa')
-
-                            #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
-
-
-                          %>
-                                   <% @place %>
-                                   <p> <% userContents %> </p>
-                                    <table class="table table-striped">
-                                    <tr>
-                                    
-                                    <td>
-                                    <span class="info-box-number label bg-blue">
-                                    FB Rating
-                                    <%= rating %>
-                                    </span>
-                                    </td>
-                                    </tr>
-                                      <tr>
-                                        <th>Site</th>
-                                        <th>Date</th>
-                                        <th>Rating</th>
-                                        <th>Review</th>
-                                        <th colspan="3"></th>
-                                      </tr>
-                                      <% userContents.each do |userContent| 
-                                        date = userContent.match(/(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}+\s/)
-                                        revRate = userContent.match(/\d{1}+\s+\bstar\b/)  
-
-                                        %>
-                                        <tr>
-                                          <td><span class="label bg-blue">Facebook</span></td>
-                                          <td><span class="label bg-blue"><%= date %></span></td>
-                                          <td><span class="label bg-blue"><%= revRate %></span></td>
-                                          <td><%= userContent %></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                        </tr>
-                                        <% end %>
-                                          </table>
-                                </div>
-
-
-
-
-
-                                <!-- /.box-body -->
-                                <div class="box-footer">
-                                 
-
-                                </div>
-                                <!-- /.box-footer-->
-                              </div>
-              </div>
-              <!-- /.tab-pane -->
-
-              <div class="tab-pane" id="yelp">
+                <div class="tab-pane" id="yelp">
                         <div class="box" style="border-top: 0px !important;">
-                                              <h3 style="text-align: center; padding-top: 20px; color: #666666!important;"><%= @user.business_name %> YELP REVIEWS</h3>
+                                              <h3 style="text-align: center; padding-top: 20px; color: #666666!important; display: none;" ><%= @user.business_name %> YELP REVIEWS</h3>
 
                         <div class="box-header with-border">
 
@@ -297,14 +203,19 @@
                         
                         <div class="box-body" style="text-align: center; margin: auto;">
                           <%
-                          @placeName = @user.business_name
-                          @city = "Crystal"
 
-                          @place = @placeName.gsub!(' ', '')
 
-                          @yelper = @placeName.gsub!(/\ +/, '-')
+                          str = @user.city
+                          #@newstr = str.parameterize('-')
+                         
+                          @city = str.parameterize('-')
 
-                            page = MetaInspector.new("https://www.yelp.com/biz/egg-house-cafe-crystal") 
+                          @yelp = @bizprofile.yelpBiz_name 
+
+
+                          @yelper = @placeName
+
+                            page = MetaInspector.new("https://www.yelp.com/biz/#{@yelp}-#{@city}") 
 
                             page.parsed
 
@@ -323,10 +234,12 @@
 
 
                           %>
-                                   <%= @place %>
+                                   <% @place %>
+                                   <%= @newstr %>
+
                                    <p> <% userContents %> </p>
                                   
-                                    <table class="table table-striped" id="res">
+                                    <table class="table table-striped" id="res" style="text-align: left;">
                                     <tr>
                                       <td>
                                       <span class="info-box-number label bg-red">
@@ -365,9 +278,11 @@
                                        
                                           </table>
                                 </div>
+                                 <div style="display: none">
                                 <span id="val"></span>
                                 <span id="rows"></span>
                                 <span id="avgRating"></span>
+                                </div>
 
                                 <!-- /.box-body -->
                                 <div class="box-footer">
@@ -381,6 +296,110 @@
               </div>
               <!-- /.tab-pane -->
 
+              
+              <div class="tab-pane" id="facebook" >
+                <div class="box" style="border-top: 0px !important;">
+                <h3 style="text-align: center; padding-top: 20px; color: #666666!important; display: none;"><%= @user.business_name %> FACEBOOK REVIEWS</h3>
+                        <div class="box-header with-border">
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                          </div>
+                        </div>
+                        <div class="box-body" style="text-align: center; margin: auto;">
+                          <%
+                          @placeName = @user.business_name
+                          @loc = "Crystal"
+
+
+                          @place = @bizprofile.fbBiz_name 
+
+                            page = MetaInspector.new("https://www.facebook.com/pg/#{@place}/reviews/") 
+
+                            page.parsed
+
+                            doc = page.parsed
+                            #dates = []
+
+                            userContents = doc.css("div._5pcr.userContentWrapper").map{ |div| div.child.text.strip}
+
+                            rating = doc.css("div._4uyi").text 
+
+                            dates = doc.css("span.timestampContent")
+                            
+                            newDate = doc.css('span.timestampContent').map{ |span| span.child.text.strip}
+
+                            content = doc.css('div._5pbx.userContent._3576.p').map{ |div| div.child.text.strip}
+
+                            revRating = doc.css('_51mq.img.sp_P4dHPMLAVud_2x.sx_ae93aa')
+
+                            #link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+
+
+                          %>
+                                   <% revRating %>
+                                   <p> <% userContents %> </p>
+                                    <table class="table table-striped" id="res1" style="text-align: left;">
+                                    <tr>
+                                    
+                                    <td>
+                                    <span class="info-box-number label bg-blue">
+                                    FB Rating
+                                    <%= rating %>
+                                    </span>
+                                    </td>
+                                    </tr>
+                                      <tr>
+                                        <th>Site</th>
+                                        <th>Date</th>
+                                        <th>Rating</th>
+                                        <th>Review</th>
+                                        <th colspan="3"></th>
+                                      </tr>
+                                      <% userContents.zip(dates.sort).each do |userContent, date| 
+                                        #date = userContent.match(/(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}+\s/)
+                                        date
+                                        #revRate = userContent.match(/\d{1}+\s/) 
+                                        revRate = userContent.match(/\d{1}+\s+\bstar\b/) 
+                                        #r1 = revRate.match(/\d{1}\s/)
+
+                                        %>
+                                          
+                                        <% d = date.text
+                                        if d.include? '2017' %>
+                                        <tr>
+                                          <td><span class="label bg-blue">Facebook</span></td>
+                                          <td><span class="label bg-blue"><%= date.text %></span></td>
+                                          <td><span class="label bg-blue"><%= revRate %></span></td>
+                                          <td><%= userContent %></td>
+                                          <td class="countable1"></td>
+                                          <td></td>
+                                          <td></td>
+                                        </tr>
+                                        <% end %>
+                                        <% end %>
+                                          </table>
+                                </div>
+                                <div style="display: none">
+                                <span id="val1"></span>
+                                <span id="rows1"></span>
+                                <span id="avgRating1"></span>
+                                </div>
+
+
+
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                 
+
+                                </div>
+                                <!-- /.box-footer-->
+                              </div>
+              </div>
+              <!-- /.tab-pane -->
+
+            
 
             </div>
             <!-- /.tab-content -->
@@ -391,12 +410,9 @@
     
      
       </div>
-      <!-- /.box -->
+      <!-- /.box --></section>
       </div>
-      <!-- /.row (main row) -->
 
-    </section>
-    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   <%= render 'layouts/rs_footer' %>
@@ -425,6 +441,24 @@
         document.getElementById('val').innerHTML = "Sum Value =" +sum
         document.getElementById('rows', 'countable').innerHTML = "Rows =" + (rowCount - 2)
         document.getElementById('avgRating').innerHTML = "Avg " + (sum / (rowCount - 2) ).toFixed(1)
+
+            }
+
+
+            function thisRate1() {
+            var rowCount1 = document.getElementById('res1').rows.length;
+            var cls1 = document.getElementById("res1").getElementsByTagName("td");
+        var sum1 = 0;
+        var avg1 = sum1 / rowCount1;
+        for (var i = 0; i < cls1.length; i++){
+            if(cls1[i].className == "countable1"){
+                sum1 += isNaN(cls1[i].innerHTML) ? 0 : parseInt(cls1[i].innerHTML);
+            }
+        }
+
+        document.getElementById('val1').innerHTML = "Sum Value =" +sum1
+        document.getElementById('rows1', 'countable1').innerHTML = "Rows =" + (rowCount1 - 2)
+        document.getElementById('avgRating1').innerHTML = "Avg " + (sum1 / (rowCount1 - 2) ).toFixed(1)
 
             }
    </script>

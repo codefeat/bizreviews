@@ -32,9 +32,9 @@
           <div class="box box-primary">
             <div class="box-body box-profile">
             <% if current_user.image.present? %>
-                                            <%= image_tag current_user.image, class: "profile-user-img img-responsive img-circle" %>
+                                            <%= image_tag current_user.image, class: "profile-user-img img-responsive img-circle", style: "margin: auto;" %>
                                             <% else %>
-                                              <%= image_tag "/assets/fallback/default.png", class: "iprofile-user-img img-responsive img-circle" %>
+                                              <%= image_tag "/assets/fallback/default.png", class: "iprofile-user-img img-responsive img-circle", style: "margin: auto;" %>
                                             <% end %>
 
               <h3 class="profile-username text-center"><%= @user.first_name %> <%= @user.last_name %></h3>

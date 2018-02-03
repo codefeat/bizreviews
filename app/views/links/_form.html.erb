@@ -1,25 +1,17 @@
-<%= form_for(@link) do |f| %>
-  <% if @link.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+  <%= form_for @link, html: { multipart: true }  do |f| %>
+  <%= f.file_field :image %>
 
-      <ul>
-      <% @link.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= devise_error_messages! %>
+<div class="form-group">
+    <%= f.label :image do %><br>
+    <%= f.file_field :image, class: "form-control", style: "display:none;" %>
     </div>
-  <% end %>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :link_cat %><br>
+  <div class="form-inputs">
     <%= f.text_field :link_cat %>
   </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

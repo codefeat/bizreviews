@@ -1,5 +1,7 @@
 class InvitesController < InheritedResources::Base
   before_action :authenticate_user!
+  #before_filter :authenticate!, except: [:provider, :provide_update]
+
 
   #after_action :get_invite_index
 
@@ -23,14 +25,16 @@ class InvitesController < InheritedResources::Base
 	  @thisUser = Invite.where(:user_id => @user)
 	  respond_to do |format|
 	    if @invite.save
-	    	@invite.delay.send_invite
+	    	@invite.send_invite
 	      format.html { redirect_to invites_path, notice: 'invite was successfully created.' }
 	    else
 	      format.html { render action: "new" }
 	    end
 	  end
 	end
-
+	def provider
+		@invite = Invite.find_by token: params[:token]
+	end
   private
 
     def invite_params

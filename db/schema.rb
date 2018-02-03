@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130041846) do
+ActiveRecord::Schema.define(version: 20180131172728) do
 
   create_table "invites", force: :cascade do |t|
     t.integer  "user_id"
@@ -68,8 +68,11 @@ ActiveRecord::Schema.define(version: 20180130041846) do
     t.string   "gplace_id"
     t.string   "gcid"
     t.string   "gfid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "googleBiz_name"
+    t.string   "fbBiz_name"
+    t.string   "yelpBiz_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,6 +97,7 @@ ActiveRecord::Schema.define(version: 20180130041846) do
     t.integer  "role",                   default: 0
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "city"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

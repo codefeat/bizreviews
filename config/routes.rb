@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   #resources :purchases, only: [:show]
 
 
-  get 'businesses/review' => 'businesses#index'
+  get 'business/review' => 'businesses#index'
 
-  
+  get 'business/reporting' => 'reports#index' 
+
+  get 'business/:business_name' => 'users#page'
 
   get 'paqs/pay'
 
@@ -56,8 +58,13 @@ Rails.application.routes.draw do
     #match 'subscriptions/:id/pay' => 'subscriptions#pay', via: [:get, :post], :as => :subpay
   devise_scope :user do 
      match 'users/acct_setting' => 'registrations#acct_setting', :via => [:get], :as => 'acct_setting'
-     get  'users/signout' => 'devise/sessions#destroy'
   end 
+
+resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+  end
+end
 
   get 'widgets/index'
 
@@ -101,6 +108,7 @@ Rails.application.routes.draw do
 
   root 'users#index'
   #root 'pages#about'
+  get 'users/password/edit' => 'devise/passwords#edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
