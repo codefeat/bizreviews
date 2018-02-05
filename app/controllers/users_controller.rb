@@ -77,8 +77,8 @@ class UsersController < ApplicationController
     #@order = current_user.orders.find(params[:id])
     #@schedules = Schedule.all
     @pReviews = ProfileReview.where(user_id: @user)
-    @bizprofile = ProfileReview.find(current_user.id)
-    @thisUser = @user.city
+    @bizprofile = ProfileReview.find(@user) if @user
+    @thisUser = @user.city if @user
     #@delivery = Delivery.where(order_id: @order)
     @pReviews = ProfileReview.all
     @pReview = ProfileReview.find_by_user_id(@user)

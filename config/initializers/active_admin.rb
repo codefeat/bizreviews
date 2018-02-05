@@ -4,12 +4,15 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
+
   config.site_title = "ReviewsSOS"
+
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
   # config.site_title_link = "/"
+
 
   if defined?(WillPaginate)
   module WillPaginate
@@ -191,6 +194,13 @@ end
   #
   # config.breadcrumb = false
 
+  # == Create Another Checkbox
+  #
+  # Create another checkbox is disabled by default. You can customize it for individual
+  # resources or you can enable them globally from here.
+  #
+  # config.create_another = true
+
   # == Register Stylesheets & Javascripts
   #
   # We recommend using the built in Active Admin layout and loading
@@ -281,4 +291,18 @@ end
   # of those filters by default here.
   #
   # config.include_default_association_filters = true
+
+  # == Footer
+  #
+  # By default, the footer shows the current Active Admin version. You can
+  # override the content of the footer here.
+  #
+  # config.footer = 'my custom footer text'
+
+  # == Sorting
+  #
+  # By default ActiveAdmin::OrderClause is used for sorting logic
+  # You can inherit it with own class and inject it for all resources
+  #
+  # config.order_clause = MyOrderClause
 end

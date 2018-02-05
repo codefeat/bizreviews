@@ -24,7 +24,7 @@ end
 
   has_many :profile_links
 
-  devise :database_authenticatable,  
+  devise :database_authenticatable, :registerable, 
          :recoverable, :rememberable, :trackable, :validatable
 
 
