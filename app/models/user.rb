@@ -21,7 +21,7 @@ end
 
   has_many :profile_links
 
-  devise :invitable, :database_authenticatable, :registerable, 
+  devise :database_authenticatable, :registerable, 
          :recoverable, :rememberable, :trackable, :validatable
          has_many :reviews, dependent:  :destroy
          has_many :roles

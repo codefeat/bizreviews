@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users, controllers: { registrations: "registrations" }
   resources :profile_reviews
   resources :poor_reviews
   resources :profile_links
@@ -36,7 +39,8 @@ Rails.application.routes.draw do
 
   #devise_for :admin_users, ActiveAdmin::Devise.config
   #ActiveAdmin.routes(self)
-  devise_for :users, controllers: { registrations: "registrations" }
+  #ActiveAdmin.routes(self)
+  #devise_for :users, controllers: { registrations: "registrations" }
   #devise_for :users, controllers: { confirmations: 'confirmations' }
   
   resources :products
