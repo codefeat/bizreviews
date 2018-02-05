@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   resources :profile_reviews
   resources :poor_reviews
   resources :profile_links
@@ -34,11 +35,11 @@ Rails.application.routes.draw do
  
   get 'profile_links/:lid/create' => 'profile_links#new'
 
-  #devise_for :admin_users, ActiveAdmin::Devise.config
-  #ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users, controllers: { registrations: "registrations" }
   #devise_for :users, controllers: { confirmations: 'confirmations' }
-  
+
   resources :products
   resources :charges
   resources :plans

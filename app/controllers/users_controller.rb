@@ -138,6 +138,12 @@ class UsersController < ApplicationController
 
   end
 
+  def check_user
+      unless current_user.admin? || user_signed_in?
+        redirect_to root_url, alert: "Sorry, only site or account admins can do that!"
+      end
+    end
+
   def invite_user
     @user = User.invite!(:email => params[:user][:email], :name => params[:user][:first_name])
     render :json => @user

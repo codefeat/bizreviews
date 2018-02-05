@@ -59,6 +59,8 @@ def show
   def profile
   end
 
+
+
   private
   def after_confirmation_path_for(resource)
      paqs_how1_path
