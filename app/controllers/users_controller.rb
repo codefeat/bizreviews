@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @thisUser = @user.city if @user
     #@delivery = Delivery.where(order_id: @order)
     @pReviews = ProfileReview.all
-    @pReview = ProfileReview.find_by_user_id(@user) if @user
+    @pReview = ProfileReview.find_by_user_id(@user) 
     @majorlinks = Link.where(:link_cat => "major")
     @somelinks = Link.where(:link_cat => "social media")
     @dirlinks = Link.where(:link_cat => "directory")

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'business/:business_name' => 'users#page'
 
+  get 'reviewssos/home' => 'pages#index'
+
   get 'paqs/pay'
 
   get 'paqs/how1'

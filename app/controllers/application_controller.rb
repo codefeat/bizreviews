@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   		@thisBiz = @lastUser.business_name
   		@revBiz	= @thisBiz.parameterize('-').downcase
   		@fbBiz = @thisBiz.gsub(' ', '').downcase
-      ProfileReview.create(:user_id => current_user.id, :googleBiz_name => @revBiz, :fbBiz_name => @fbBiz, :yelpBiz_name => @revBiz)
+      ProfileReview.create(:user_id => current_user.id, :googleBiz_name => @revBiz, :fbBiz_name => @fbBiz, :yelpBiz_name => @revBiz, :gplace_id => 'add info', :gcid => 'add info', :gfid => 'add info')
   end
 
   def after_update_path
