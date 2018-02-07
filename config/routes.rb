@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users, controllers: { registrations: "registrations" }
   resources :profile_reviews
   resources :poor_reviews
   resources :profile_links
@@ -13,6 +17,8 @@ Rails.application.routes.draw do
   get 'business/reporting' => 'reports#index' 
 
   get 'business/:business_name' => 'users#page'
+
+  get 'reviewssos/home' => 'pages#index'
 
   get 'paqs/pay'
 
@@ -34,11 +40,14 @@ Rails.application.routes.draw do
  
   get 'profile_links/:lid/create' => 'profile_links#new'
 
+
   #devise_for :admin_users, ActiveAdmin::Devise.config
   #ActiveAdmin.routes(self)
-  devise_for :users, controllers: { registrations: "registrations" }
+  #ActiveAdmin.routes(self)
+  #devise_for :users, controllers: { registrations: "registrations" }
+
   #devise_for :users, controllers: { confirmations: 'confirmations' }
-  
+
   resources :products
   resources :charges
   resources :plans

@@ -41,12 +41,20 @@ class ApplicationController < ActionController::Base
   		@thisBiz = @lastUser.business_name
   		@revBiz	= @thisBiz.parameterize('-').downcase
   		@fbBiz = @thisBiz.gsub(' ', '').downcase
-      ProfileReview.create(:user_id => current_user.id, :googleBiz_name => @revBiz, :fbBiz_name => @fbBiz, :yelpBiz_name => @revBiz)
+      ProfileReview.create(:user_id => current_user.id, :googleBiz_name => @revBiz, :fbBiz_name => @fbBiz, :yelpBiz_name => @revBiz, :gplace_id => 'add info', :gcid => 'add info', :gfid => 'add info')
   end
 
   def after_update_path
     redirect_to root_path
   end
+
+   def after_sign_in_path_for(resource_or_scope)
+      if resource_or_scope.is_a?(User)
+        root_path
+      elsif resource_or_scope.is_a?(AdminUser) 
+        admin_dashboard_path(resource_or_scope)
+      end
+    end
 
   #def respond_modal_with(*args, &blk)
     #options = args.extract_options!

@@ -25,92 +25,13 @@
 
   <body>
 
-  <nav class="navbar navbar-default" style="background: white !important">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#" style="color: #2388f9; ">ReviewsSOS</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" style="display: none;">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" style="display: none;">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Sign In", new_user_session_path %></li>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <li class="dropdown" style="display: none;">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-
     <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top" style="display: none;">
+    <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
         <a class="navbar-brand" href="#" style="color: #2388f9;">ReviewsSOS</a>
-        <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary pull-right" %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary pull-right" %>
         <a class="btn btn-primary pull-right" href="#">Sign In</a>
       </div>
     </nav>
-
-     <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Services</a>
-                    </li>
-                          <li><%= link_to "Sign Up", new_user_registration_path, class: "page-scroll" %></li>
-                          <li><%= link_to "Sign In", new_user_session_path, class: "page-scroll" %></li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
 
 
 
@@ -118,7 +39,7 @@
 
 
     <!-- Masthead -->
-    <header class="masthead text-white text-center" style="margin-top: -20px;">
+    <header class="masthead text-white text-center">
       <div class="overlay" style="display: none;"></div>
       <div class="container">
         <div class="row">
@@ -148,27 +69,27 @@
       <div class="container">
         <div class="row">
         <div class="row">
-              <div class="col-md-4">
-                    <div class="features-icons-icon d-flex">
-                    <i class="icon-screen-desktop m-auto text-primary" style="font-size: 20rem; color: #2388f9;"></i>
-                  </div>
-                  <h3>Reputation Improvment</h3>
-                  <p class="lead mb-0">Improve your online reputation on Google, Yelp, Facebook, and more!</p>
-              </div>
-              <div class="col-md-4">
-                    <div class="features-icons-icon d-flex">
-                    <i class="icon-check m-auto text-primary" style="font-size: 20rem; color: #2388f9;"></i>
-                  </div>
-                  <h3>It's Simple</h3>
+	          <div class="col-md-4">
+		          	<div class="features-icons-icon d-flex">
+	                <i class="icon-screen-desktop m-auto text-primary" style="font-size: 20rem; color: #2388f9;"></i>
+	              </div>
+	              <h3>Reputation Improvment</h3>
+	              <p class="lead mb-0">Improve your online reputation on Google, Yelp, Facebook, and more!</p>
+	          </div>
+	          <div class="col-md-4">
+		          	<div class="features-icons-icon d-flex">
+	                <i class="icon-check m-auto text-primary" style="font-size: 20rem; color: #2388f9;"></i>
+	              </div>
+	              <h3>It's Simple</h3>
               <p class="lead mb-0">Reviews SOS makes it EASY!</p>
-              </div>
-              <div class="col-md-4">
-                    <div class="features-icons-icon d-flex">
-                    <i class="icon-chart m-auto text-primary" style="font-size: 20rem; color: #2388f9;"></i>
-                  </div>
-                  <h3>Take Control</h3>
+	          </div>
+	          <div class="col-md-4">
+		          	<div class="features-icons-icon d-flex">
+	                <i class="icon-chart m-auto text-primary" style="font-size: 20rem; color: #2388f9;"></i>
+	              </div>
+	              <h3>Take Control</h3>
               <p class="lead mb-0">What kind of control do online reviews have over customer decision-making?</p>
-              </div>
+	          </div>
           </div>
         </div>
       </div>
@@ -209,28 +130,28 @@
       <div class="container">
         <h2 class="mb-5">What people are saying...</h2>
         <div class="row">
-            <div class="col-md-4">
-                
-                
-                  <img class="img-fluid rounded-circle mb-3" src="<%= image_path('testimonials-1.jpg') %>" alt="" style="border-radius: 250px;
+        	<div class="col-md-4">
+        		
+	            
+	              <img class="img-fluid rounded-circle mb-3" src="<%= image_path('testimonials-1.jpg') %>" alt="" style="border-radius: 250px;
     width: 175px;">
-                  <h5>Margaret E.</h5>
-                  <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-               
-              
-            </div>
-            <div class="col-md-4">
-                <img class="img-fluid rounded-circle mb-3" src="<%= image_path('testimonials-2.jpg') %>" alt="" style="border-radius: 250px;
+	              <h5>Margaret E.</h5>
+	              <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+	           
+	          
+        	</div>
+        	<div class="col-md-4">
+        		<img class="img-fluid rounded-circle mb-3" src="<%= image_path('testimonials-2.jpg') %>" alt="" style="border-radius: 250px;
     width: 175px;">
-                 <h5>Fred S.</h5>
+   				 <h5>Fred S.</h5>
               <p class="font-weight-light mb-0">"ReviewsSOS is amazing. I've been using it to improve my online reviews and increase my online leads."</p>
-            </div>
-            <div class="col-md-4">
-                <img class="img-fluid rounded-circle mb-3" src="<%= image_path('testimonials-3.jpg') %>" alt="" style="border-radius: 250px;
+        	</div>
+        	<div class="col-md-4">
+        		<img class="img-fluid rounded-circle mb-3" src="<%= image_path('testimonials-3.jpg') %>" alt="" style="border-radius: 250px;
     width: 175px;">
-                <h5>Sarah W.</h5>
+    			<h5>Sarah W.</h5>
               <p class="font-weight-light mb-0">"Thanks so much for making this wonderful resources available to us!"</p>
-            </div>
+        	</div>
         </div>
         <div class="row" style="display: none;">
           <div class="col-lg-4">
@@ -250,7 +171,7 @@
           <div class="col-lg-4">
             <div class="testimonial-item mx-auto mb-5 mb-lg-0">
               <img class="img-fluid rounded-circle mb-3" src="img/testimonials-3.jpg" alt="">
-              <h5>Sarah W.</h5>
+              <h5>Sarah	W.</h5>
               <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
             </div>
           </div>
@@ -305,10 +226,6 @@
               </li>
             </ul>
             <p class="text-muted small mb-4 mb-lg-0">&copy; ReviewsSOS 2018. All Rights Reserved.</p>
-             <h1>Contact Us</h1>
-
-                    <h3>Email: info@spotberry.com</h3>
-                    <h3>PHone: 612-787-7145</h3>
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
             <ul class="list-inline mb-0">
@@ -340,4 +257,3 @@
   </body>
 
 </html>
-

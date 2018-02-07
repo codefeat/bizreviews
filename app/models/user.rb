@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+ 
   #before_create :confirmation_token
 #attr_accessor :first_name, :email
 after_create :send_admin_mail
@@ -10,8 +13,8 @@ end
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   
-  has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'
-  has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
+  #has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'
+  #has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
 
   has_many :invites
   has_many :poor_reviews
@@ -21,16 +24,8 @@ end
 
   has_many :profile_links
 
-  devise :invitable, :database_authenticatable, :registerable, 
+  devise :database_authenticatable, :registerable, 
          :recoverable, :rememberable, :trackable, :validatable
-         has_many :reviews, dependent:  :destroy
-         has_many :roles
-         has_many :deliveries
-         has_many :orders
-         has_many :appointments
-         has_many :subscriptions
-         has_many :plans
-         has_many :promos
 
 
          validates :business_name, :business_phone, :business_zipcode, :first_name, :last_name, :business_url, presence: true

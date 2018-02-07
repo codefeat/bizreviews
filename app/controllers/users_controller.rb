@@ -30,18 +30,18 @@ class UsersController < ApplicationController
     #@delivery = current_user.deliveries.find(params[:order_id])
     #@order = current_user.orders.find(params[:id])
     #@schedules = Schedule.all
-    @pReviews = ProfileReview.where(user_id: @user)
-    @bizprofile = ProfileReview.find(current_user.id)
-    @thisUser = @user.city
+    @pReviews = ProfileReview.where(user_id: @user) if @user
+    @bizprofile = ProfileReview.find(current_user.id) if @user
+    @thisUser = @user.city if @user
     #@delivery = Delivery.where(order_id: @order)
     @pReviews = ProfileReview.all
-    @pReview = ProfileReview.find_by_user_id(@user)
+    @pReview = ProfileReview.find_by_user_id(@user) 
     @majorlinks = Link.where(:link_cat => "major")
     @somelinks = Link.where(:link_cat => "social media")
     @dirlinks = Link.where(:link_cat => "directory")
     @loclinks = Link.where(:link_cat => "local")
     @pLinks = ProfileLink.all
-    @profileLinks = ProfileLink.where(user_id: @user)
+    @profileLinks = ProfileLink.where(user_id: @user) if @user
     #@product = Order.where(product_id: @order.products.id)
     #@delivery = Delivery.find(params[:order_id])
     @prolnks = ProfileLink.includes(:link).all
@@ -77,8 +77,8 @@ class UsersController < ApplicationController
     #@order = current_user.orders.find(params[:id])
     #@schedules = Schedule.all
     @pReviews = ProfileReview.where(user_id: @user)
-    @bizprofile = ProfileReview.find(current_user.id)
-    @thisUser = @user.city
+    @bizprofile = ProfileReview.find(@user) if @user
+    @thisUser = @user.city if @user
     #@delivery = Delivery.where(order_id: @order)
     @pReviews = ProfileReview.all
     @pReview = ProfileReview.find_by_user_id(@user)
@@ -137,6 +137,12 @@ class UsersController < ApplicationController
       end
 
   end
+
+  def check_user
+      unless current_user.admin? || user_signed_in?
+        redirect_to root_url, alert: "Sorry, only site or account admins can do that!"
+      end
+    end
 
   def invite_user
     @user = User.invite!(:email => params[:user][:email], :name => params[:user][:first_name])
